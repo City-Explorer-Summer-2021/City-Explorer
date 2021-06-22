@@ -1,6 +1,6 @@
-package com.example.CityExplorer.repository;
+package com.example.cityexplorer.repository;
 
-import com.example.CityExplorer.model.User;
+import com.example.cityexplorer.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

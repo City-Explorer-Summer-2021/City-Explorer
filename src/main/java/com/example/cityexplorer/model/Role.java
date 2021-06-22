@@ -1,4 +1,4 @@
-package com.example.CityExplorer.model;
+package com.example.cityexplorer.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

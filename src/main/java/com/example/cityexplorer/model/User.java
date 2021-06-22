@@ -1,7 +1,6 @@
-package com.example.CityExplorer.model;
+package com.example.cityexplorer.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
