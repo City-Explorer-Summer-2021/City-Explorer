@@ -8,6 +8,12 @@ CREATE TABLE city
     lon float8 NOT NULL
 );
 
+CREATE TABLE transport_category(
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    city_id BIGSERIAL
+);
+
 CREATE TABLE city_photo(
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
@@ -15,17 +21,14 @@ CREATE TABLE city_photo(
     FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
-CREATE TABLE transport_category(
-    id BIGSERIAL NOT NULL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE
-);
-
 CREATE TABLE transport(
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     price VARCHAR(255) NOT NULL,
     category_id BIGSERIAL NOT NULL,
-    FOREIGN KEY(category_id) REFERENCES transport_category(id)
+    city_id BIGSERIAL NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES transport_category(id),
+    FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
 CREATE TABLE attraction(
@@ -70,7 +73,3 @@ CREATE TABLE food_place(
     city_id BIGSERIAL NOT NULL,
     FOREIGN KEY (city_id) REFERENCES city(id)
 );
-
-
-
-
