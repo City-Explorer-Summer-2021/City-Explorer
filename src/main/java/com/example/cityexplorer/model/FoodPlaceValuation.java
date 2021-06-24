@@ -12,20 +12,30 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "event_photo")
+@Table(name = "food_place_valuation")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventPhoto {
+public class FoodPlaceValuation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @JoinColumn(name = "food_place_id")
+    private FoodPlace foodPlace;
+
+    @NotNull
+    @Min(value = 1, message = "The value must be between 1 and 5")
+    @Max(value = 5, message = "The value must be between 1 and 5")
+    private int value;
 }

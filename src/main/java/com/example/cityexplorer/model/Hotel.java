@@ -19,11 +19,11 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "food_place")
+@Table(name = "hotel")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodPlace {
+public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,17 +33,22 @@ public class FoodPlace {
     private String name;
 
     @NotBlank(message = "Description cannot be empty")
-    @Size(max = 1023, message = "Must be less then 1023")
     private String description;
 
     @NotBlank(message = "Address cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
     private String address;
+
+    @NotBlank(message = "Phone cannot be empty")
+    private String phone;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(mappedBy = "foodPlace", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodPlaceValuation> foodPlaceValuationList;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private HotelCategory hotelCategory;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HotelPhoto> hotelPhotoList;
 }

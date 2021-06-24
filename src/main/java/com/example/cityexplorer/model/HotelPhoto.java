@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "event_photo")
+@Table(name = "hotel_photo")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventPhoto {
+public class HotelPhoto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +26,6 @@ public class EventPhoto {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 }
