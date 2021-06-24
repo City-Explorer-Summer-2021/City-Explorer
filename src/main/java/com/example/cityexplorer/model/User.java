@@ -6,19 +6,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -43,6 +34,20 @@ public class User implements UserDetails {
 
     @Email(message = "Email is not correct")
     private String email;
+
+    @NotBlank(message = "Phone number cannot be empty")
+    @Size(max = 255, message = "Must be less then 255")
+    private String phone;
+
+    @NotBlank(message = "Firstname cannot be empty")
+    @Size(max = 255, message = "Must be less then 255")
+    @Column(name = "firstname")
+    private String firstName;
+
+    @NotBlank(message = "Lastname cannot be empty")
+    @Size(max = 255, message = "Must be less then 255")
+    @Column(name = "lastname")
+    private String lastName;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
