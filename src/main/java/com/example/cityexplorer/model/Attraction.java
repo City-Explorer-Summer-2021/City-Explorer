@@ -45,6 +45,6 @@ public class Attraction {
     private City city;
 
     @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AttractionPhoto> attractionPhotoList;
+    private List<AttractionPhoto> photos;
 
 }

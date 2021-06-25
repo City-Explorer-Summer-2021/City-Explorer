@@ -17,10 +17,24 @@ public enum ErrorMessages {
     NULL_TIMESTAMP("Timestamp should not be null"),
     NULL_DESCRIPTION("Description should not be null"),
     NULL_PASSWORD("Password should not be null"),
-    NULL_EXPENSE_TYPE_ID("Expense type id should not be null"),
-    NULL_EXPENSE_TYPE_OBJECT("Expense type object should not be null"),
-    NULL_TRAVEL_ID("Travel id should not be null"),
-    NULL_TRAVEL_OBJECT("Travel object should not be null");
+    NULL_ATTRACTION_ID("Attraction id should not be null"),
+    NULL_ATTRACTION_OBJECT("Attraction object should not be null"),
+    NULL_CITY_ID("City id should not be null"),
+    NULL_CITY_OBJECT("City object should not be null"),
+    NULL_EVETNT_ID("Event id should not be null"),
+    NULL_EVENT_OBJECT("Event object should not be null"),
+    NULL_FOOD_PLACE_ID("Food place id should not be null"),
+    NULL_FOOD_PLACE_OBJECT("Food place object should not be null"),
+    NULL_FOOD_PLACE_VALUATION_ID("Food place valuation id should not be null"),
+    NULL_FOOD_PLACE_VALUATION_OBJECT("Food place valuation object should not be null"),
+    NULL_HOTEL_ID("Hotel id should not be null"),
+    NULL_HOTEL_OBJECT("Hotel object should not be null"),
+    NULL_HOTEL_CATEGORY_ID("Hotel category id should not be null"),
+    NULL_HOTEL_CATEGORY_OBJECT("Hotel category object should not be null"),
+    NULL_TRANSPORT_ID("Transport id should not be null"),
+    NULL_TRANSPORT_OBJECT("Transport object should not be null"),
+    NULL_TRANSPORT_CATEGORY_ID("Transport category id should not be null"),
+    NULL_TRANSPORT_CATEGORY_OBJECT("Transport category object should not be null");
 
     private final String errorMessage;
 

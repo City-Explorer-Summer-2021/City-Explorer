@@ -45,5 +45,5 @@ public class FoodPlace {
     private City city;
 
     @OneToMany(mappedBy = "foodPlace", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodPlaceValuation> foodPlaceValuationList;
+    private List<FoodPlaceValuation> foodPlaceValuations;
 }
