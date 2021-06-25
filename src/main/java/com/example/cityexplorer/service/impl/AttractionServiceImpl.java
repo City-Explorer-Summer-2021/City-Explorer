@@ -3,6 +3,7 @@ package com.example.cityexplorer.service.impl;
 import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.exception.NotFoundException;
 import com.example.cityexplorer.model.Attraction;
+import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.repository.AttractionRepository;
 import com.example.cityexplorer.service.AttractionService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +29,11 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     @Transactional(readOnly = true)
     @NotNull
-    public List<Attraction> getList() {
-        log.info("Requested Attraction list");
-        return attractionRepository.findAll();
+    public List<Attraction> getList(@NotNull City city) {
+        Assert.notNull(city, ErrorMessages.NULL_CITY_OBJECT.getErrorMessage());
+
+        log.info("Requested Attraction list for {} ({})", city.getName(), city.getId());
+        return attractionRepository.findAllByCity(city);
     }
 
     @Override

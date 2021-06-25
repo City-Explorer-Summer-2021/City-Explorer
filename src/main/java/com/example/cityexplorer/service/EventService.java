@@ -1,12 +1,13 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Event;
 
 import java.util.List;
 
 public interface EventService {
 
-    List<Event> getList();
+    List<Event> getList(City city);
 
     Event getById(Long id);
 
