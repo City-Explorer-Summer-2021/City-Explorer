@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-  <title>Sign in</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
 <body>
-<div th:if="${param.error}">
-  Invalid username and password.
+<div layout:fragment="content_part">
+  <br><br><br>
+  <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Вход в учётную запись</h3></div>
+  <br><br>
+
+  <div th:if="${param.logout}">
+    <div class="alert alert-warning" role="alert">
+      Вы вышли из учётной записи
+    </div>
+  </div>
+  <div th:if="${param.error}">
+    <div class="alert alert-danger" role="alert">
+      Введен неверный логин или пароль
+    </div>
+  </div>
+  <form th:action="@{/login}" method="post">
+
+    <h5 class="h5 mb-3 font-weight-normal">Пожалуйста, войдите в Вашу учётную запись:</h5>
+
+    <label for="inputlogin" class="visually-hidden">Введите Ваше имя пользователя:</label>
+    <input type="text" name="username" id="inputlogin" class="form-control" required>
+    <label for="inputPassword" class="visually-hidden">Введите Ваш пароль:</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
+           minlength="1" maxlength="25" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me" name="remember-me"> Запомнить меня
+      </label>
+    </div>
+    <button class="btn btn-lg btn-secondary btn-block" type="submit">Войти в учётную запись</button>
+  </form>
+  <br>
+  <p align="center">Нет учётной записи? <a th:href="@{/registration}" style="color: grey">Регистрация</a>
+  </p>
 </div>
-<div th:if="${param.logout}">
-  You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-  <div><label> User Name : <input type="text" name="username"/> </label></div>
-  <div><label> Password: <input type="password" name="password"/> </label></div>
-  <div><input type="submit" value="Sign In"/></div>
-</form>
-<p>Click <a th:href="@{/registration}">here</a> to sign up.</p>
 </body>
 </html>
