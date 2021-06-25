@@ -1,4 +1,4 @@
-package com.example.cityexplorer.service.impl;
+package com.example.cityexplorer.service;
 
 import com.example.cityexplorer.model.FoodPlaceValuation;
 
