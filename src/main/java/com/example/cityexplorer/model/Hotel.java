@@ -50,5 +50,5 @@ public class Hotel {
     private HotelCategory hotelCategory;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HotelPhoto> hotelPhotoList;
+    private List<HotelPhoto> photos;
 }

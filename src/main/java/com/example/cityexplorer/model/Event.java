@@ -55,5 +55,5 @@ public class Event {
     private City city;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EventPhoto> eventPhotoList;
+    private List<EventPhoto> photos;
 }
