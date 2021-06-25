@@ -24,14 +24,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registration").permitAll()
+                .antMatchers("/", "/home","/images/**").permitAll()
+                .antMatchers("/login", "/registration", "/hello").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .loginPage("/login")
                 .and()
-                .logout()
+                    .rememberMe()
+                    .tokenValiditySeconds(86400)
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/home")
+                .and()
+                    .logout()
                 .permitAll();
     }
 
@@ -42,4 +48,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-

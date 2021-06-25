@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,17 +29,18 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String registration(Model model) {
         User user = new User();
-        model.addAttribute("user", user);
+        model.addAttribute("newUser", user);
         return "registration";
     }
 
-    @PostMapping("registration")
+    @PostMapping("/registration")
     public String addUser(
-            @RequestParam("password2") String passwordConfirm,
-            @Valid User user,
+            @RequestParam(value = "password2") String passwordConfirm,
+            @Valid @ModelAttribute("newUser") User user,
             BindingResult bindingResult,
             Model model) {
         boolean confirmEmpty = ObjectUtils.isEmpty(passwordConfirm);
+
 //        if (confirmEmpty) {
 //            model.addAttribute("password2Error", "Passwords confirmation cannot be empty");
 //        }
@@ -62,7 +64,6 @@ public class RegistrationController {
         } catch (Exception e) {
             return "registration";
         }
-
-        return "redirect:/login";
+        return "registration_success";
     }
 }
