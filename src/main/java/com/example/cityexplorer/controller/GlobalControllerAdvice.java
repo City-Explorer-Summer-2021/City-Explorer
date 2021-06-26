@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.List;
+
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
@@ -21,7 +23,12 @@ public class GlobalControllerAdvice {
         @ModelAttribute
         public void addCityInfoToAllPages(Model model) {
             City city = cityService.getById(1L);
+
             CityDto cityDto = new CityDto(city.getId(), city.getName());
             model.addAttribute("cityDto", cityDto);
+
+            List<City> allCities = cityService.getOrderedByNameList();
+            model.addAttribute("allCities", allCities);
+
         }
 }

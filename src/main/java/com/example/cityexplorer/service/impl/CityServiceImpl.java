@@ -36,6 +36,14 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional(readOnly = true)
     @NotNull
+    public List<City> getOrderedByNameList() {
+        log.info("Requested City list ordered by Name");
+        return cityRepository.findByOrderByNameAsc();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @NotNull
     public City getById(@NotNull Long id) {
         Assert.notNull(id, ErrorMessages.NULL_CITY_ID.getErrorMessage());
 
