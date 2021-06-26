@@ -1,12 +1,13 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.FoodPlace;
 
 import java.util.List;
 
 public interface FoodPlaceService {
 
-    List<FoodPlace> getList();
+    List<FoodPlace> getList(City city);
 
     FoodPlace getById(Long id);
 

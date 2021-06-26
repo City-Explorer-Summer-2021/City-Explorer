@@ -1,12 +1,13 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Hotel;
 
 import java.util.List;
 
 public interface HotelService {
 
-    List<Hotel> getList();
+    List<Hotel> getList(City city);
 
     Hotel getById(Long id);
 
@@ -14,5 +15,5 @@ public interface HotelService {
 
     Hotel update(Long id, Hotel hotel);
 
-    Hotel delete(Long id);
+    void delete(Long id);
 }

@@ -1,12 +1,13 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Transport;
 
 import java.util.List;
 
 public interface TransportService {
 
-    List<Transport> getList();
+    List<Transport> getList(City city);
 
     Transport getById(Long id);
 
