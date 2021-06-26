@@ -1,5 +1,6 @@
 package com.example.cityexplorer.controller;
 
+import com.example.cityexplorer.dto.CityDto;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class GlobalControllerAdvice {
         @ModelAttribute
         public void addCityInfoToAllPages(Model model) {
             City city = cityService.getById(1L);
-            model.addAttribute("city", city);
+            CityDto cityDto = new CityDto(city.getId(), city.getName());
+            model.addAttribute("cityDto", cityDto);
         }
 }
