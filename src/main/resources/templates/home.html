@@ -7,28 +7,87 @@
 <body>
 <div layout:fragment="content_part">
 
-  <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Тут название города</h3>
+    <div th:object = "${city}">
+
+      <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;"
+                                           th:text="*{name}">Город</h3></div>
     <br>
-    <p>Тут описание города</p>
+        <tr class="align-middle">
+          <span th:if="*{description == null}">
+            <td th:text="'Описания пока что нет'"></td>
+            </span>
+          <span th:unless="*{description == null}">
+            <td th:text="*{description}"></td>
+            </span>
+        </tr>
     <br><br>
     <h4>Фотографии:</h4>
-    <p>Тут фотографии города(если они есть), вставим карусель</p>
+      <tr class="align-middle">
+          <span th:if="*{photos.size() == 0}">
+            <td th:text="'Фотографий города пока что нет'">Фотографий города пока что нет</td>
+            </span>
+
+        <span th:unless="*{photos.size() == 0}">
+          <p>тут фото</p>
+            </span>
+      </tr>
     <br><br>
     <h4>Транспорт:</h4>
-    <p>Тут информация о транспорте, если он добавлен</p>
+        <tr class="align-middle">
+          <span th:if="*{transports.size() == 0}">
+            <td th:text="'Информации о Транспорте пока что нет'">Информации о Транспорте пока что нет</td>
+            </span>
+
+            <span th:unless="*{transports.size() == 0}">
+          <p>тут инфа о траспорте мб форичем</p>
+            </span>
+        </tr>
     <br><br>
     <h4>Жильё:</h4>
-    <p>Тут информация о жильё(+фото), если оно добавлено</p>
+        <tr class="align-middle">
+          <span th:if="*{hotels.size() == 0}">
+            <td th:text="'Информации о Доступном жилье пока что нет'">Информации о Доступном жилье пока что нет</td>
+            </span>
+
+            <span th:unless="*{hotels.size() == 0}">
+          <p>тут информация о жилье мб форичем</p>
+            </span>
+        </tr>
     <br><br>
     <h4>Достопримечательности:</h4>
-    <p>Тут информация о достопримечательностях(+фото), если они добавлены</p>
+        <tr class="align-middle">
+          <span th:if="*{attractions.size() == 0}">
+            <td th:text="'Информации о Достопримечательностях пока что нет'">Информации о Достопримечательностях пока что нет</td>
+            </span>
+
+            <span th:unless="*{attractions.size() == 0}">
+          <p>тут информация о достопримечательностях мб форичем</p>
+            </span>
+        </tr>
     <br><br>
     <h4>Массовые мероприятия:</h4>
-    <p>Тут информация о мероприятиях(+фото), если они добавлены</p>
+        <tr class="align-middle">
+          <span th:if="*{events.size() == 0}">
+            <td th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</td>
+            </span>
+
+            <span th:unless="*{events.size() == 0}">
+          <p>тут информация о Масс мероприятиях мб форичем</p>
+            </span>
+        </tr>
+<!--    <p>Тут информация о мероприятиях(+фото), если они добавлены</p>-->
     <br><br>
     <h4>Места питания:</h4>
-    <p>Тут информация о местах питания, если они добавлены</p>
-  </div>
+        <tr class="align-middle">
+          <span th:if="*{foodPlaces.size() == 0}">
+            <td th:text="'Информации о Местах питания пока что нет'">Информации о Местах питания пока что нет</td>
+            </span>
+
+            <span th:unless="*{foodPlaces.size() == 0}">
+          <p>тут информация о Местах питания мб форичем</p>
+            </span>
+        </tr>
+</div>
 </div>
 </body>
 </html>

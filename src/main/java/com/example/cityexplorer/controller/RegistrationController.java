@@ -4,6 +4,7 @@ import com.example.cityexplorer.controller.ControllerUtils;
 import com.example.cityexplorer.exception.UsernameAlreadyTakenException;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -22,6 +23,7 @@ public class RegistrationController {
 
     private final UserService userService;
 
+    @Autowired
     public RegistrationController(UserService userService) {
         this.userService = userService;
     }

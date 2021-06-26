@@ -34,13 +34,13 @@ public class City {
     private String description;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CityPhoto> cityPhotoList;
+    private List<CityPhoto> photos;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transport> transportList;
+    private List<Transport> transports;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Hotel> hotelList;
+    private List<Hotel> hotels;
 
     @NotBlank(message = "Latitude value cannot be empty")
     private BigDecimal lat;
@@ -49,12 +49,12 @@ public class City {
     private BigDecimal lon;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Attraction> attractionList;
+    private List<Attraction> attractions;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Event> eventList;
+    private List<Event> events;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodPlace> foodPlaceList;
+    private List<FoodPlace> foodPlaces;
 
 }

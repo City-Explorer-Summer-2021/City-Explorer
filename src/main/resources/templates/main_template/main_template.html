@@ -15,7 +15,7 @@
 </head>
 <body class="bg-light">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1b1e21">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #191970">
         <div class="container">
             <a class="navbar-brand" href="/"><img th:src="@{/images/header-logo.png}"></a>
 
@@ -51,9 +51,53 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Текущий город:</span>
                     </li>
+
+<!--                    <li class="nav-item">-->
+<!--                        <div th:object = "${city}">-->
+
+<!--&lt;!&ndash;                            <h3 style="alignment: center; margin-top: 15px;"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                 th:text="*{name}">Город</h3>&ndash;&gt;-->
+<!--                            <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-target="#staticBackdrop">ГОРОД</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+
+
+                    <!-- Button trigger modal -->
+<!--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
+<!--                        Launch static backdrop modal-->
+<!--                    </button>-->
+
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">ГОРОД</a>
+                        <div th:object = "${city}">
+<!--                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
+<!--                                Launch static backdrop modal-->
+<!--                            </button>-->
+                            <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-toggle="modal" data-target="#staticBackdrop">ГОРОД</a>
+                        </div>
                     </li>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Выберите нужный город:</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Список городов через форич </p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+<!--                                    <button type="button" class="btn btn-primary">Understood</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 <!--                    <div sec:authorize="hasRole('ROLE_USER')">-->
 <!--                                        <li class="nav-item">-->
@@ -91,7 +135,7 @@
 <!--                        <form th:action="@{auth/logout}" method="post">-->
 <!--                        <form action="/logout">-->
                                                 <form th:action="@{/logout}" method="post">
-                            <button type="submit" class="btn btn-outline-danger">Выйти из профиля</button>
+                            <button type="submit" class="btn btn-primary">Выйти из профиля</button>
                         </form>
 <!--                        <form th:action="@{/logout}" method="post">-->
 <!--                            <input type="submit" value="Sign Out"/>-->
