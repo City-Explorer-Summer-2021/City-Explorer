@@ -8,6 +8,8 @@ public interface CityService {
 
     List<City> getList();
 
+    List<City> getOrderedByNameList();
+
     City getById(Long id);
 
     City save(City city);

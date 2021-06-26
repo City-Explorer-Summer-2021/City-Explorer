@@ -30,20 +30,23 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Главная страница</a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link active" href="/about">About System</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link active" href="/about">About System</a>-->
+                    <!--                    </li>-->
                     <div sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
-<!--                            <a class="nav-link active" aria-current="page" href="/auth/registration">Регистрация</a>-->
+                            <!--                            <a class="nav-link active" aria-current="page" href="/auth/registration">Регистрация</a>-->
                             <a class="nav-link active" aria-current="page" href="/registration">Регистрация</a>
                         </li>
                     </div>
                     <div sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
-<!--                            <a class="nav-link active" aria-current="page" href="/auth/login">Войти в систему</a>-->
+                            <!--                            <a class="nav-link active" aria-current="page" href="/auth/login">Войти в систему</a>-->
                             <a class="nav-link active" aria-current="page" href="/login">Войти в систему</a>
                         </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link active" aria-current="page" href="/city/add">Добавить город</a>
                     </div>
 
                     <li class="navbar-text">
@@ -52,27 +55,27 @@
                                 Текущий город:</span>
                     </li>
 
-<!--                    <li class="nav-item">-->
-<!--                        <div th:object = "${city}">-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <div th:object = "${city}">-->
 
-<!--&lt;!&ndash;                            <h3 style="alignment: center; margin-top: 15px;"&ndash;&gt;-->
-<!--&lt;!&ndash;                                                                 th:text="*{name}">Город</h3>&ndash;&gt;-->
-<!--                            <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-target="#staticBackdrop">ГОРОД</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
+                    <!--&lt;!&ndash;                            <h3 style="alignment: center; margin-top: 15px;"&ndash;&gt;-->
+                    <!--&lt;!&ndash;                                                                 th:text="*{name}">Город</h3>&ndash;&gt;-->
+                    <!--                            <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-target="#staticBackdrop">ГОРОД</a>-->
+                    <!--                        </div>-->
+                    <!--                    </li>-->
 
 
 
                     <!-- Button trigger modal -->
-<!--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
-<!--                        Launch static backdrop modal-->
-<!--                    </button>-->
+                    <!--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
+                    <!--                        Launch static backdrop modal-->
+                    <!--                    </button>-->
 
                     <li class="nav-item">
                         <div th:object = "${cityDto}">
-<!--                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
-<!--                                Launch static backdrop modal-->
-<!--                            </button>-->
+                            <!--                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
+                            <!--                                Launch static backdrop modal-->
+                            <!--                            </button>-->
                             <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-toggle="modal" data-target="#staticBackdrop">ГОРОД</a>
                         </div>
                     </li>
@@ -88,69 +91,72 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Список городов через форич </p>
-
+                                    <table>
+                                        <tr th:each="city : ${allCities}">
+                                            <td th:text="${city.name}">Город</td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-<!--                                    <button type="button" class="btn btn-primary">Understood</button>-->
+                                    <!--                                    <button type="button" class="btn btn-primary">Understood</button>-->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-<!--                    <div sec:authorize="hasRole('ROLE_USER')">-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link active" aria-current="page" href="/ticket_machine/new_ticket">Create a Ticket</a>-->
-<!--                                        </li>-->
-<!--                    </div>-->
+                    <!--                    <div sec:authorize="hasRole('ROLE_USER')">-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link active" aria-current="page" href="/ticket_machine/new_ticket">Create a Ticket</a>-->
+                    <!--                                        </li>-->
+                    <!--                    </div>-->
                 </ul>
                 <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                    <li class="navbar-text">
-                        Добро пожаловать,
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            <span sec:authentication="name">Пользователь</span>
-                        </a>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                        <li class="navbar-text">
+                            Добро пожаловать,
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span sec:authentication="name">Пользователь</span>
+                            </a>
 
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/ticket_machine">My Tickets</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">My Account info</a></li>
-                            <!--                        <li><hr class="dropdown-divider"></li>-->
-                            <!--                        <li><a class="dropdown-item" href="#">My Account info</a></li>-->
-                        </ul>
-                    </li>
-                </ul>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/ticket_machine">My Tickets</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">My Account info</a></li>
+                                <!--                        <li><hr class="dropdown-divider"></li>-->
+                                <!--                        <li><a class="dropdown-item" href="#">My Account info</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px">
-                    <li class="nav-item" style="margin-left: 10px">
-<!--                        <form action="/logout">-->
-<!--                        <form th:action="@{auth/logout}" method="post">-->
-<!--                        <form action="/logout">-->
-                                                <form th:action="@{/logout}" method="post">
-                            <button type="submit" class="btn btn-primary">Выйти из профиля</button>
-                        </form>
-<!--                        <form th:action="@{/logout}" method="post">-->
-<!--                            <input type="submit" value="Sign Out"/>-->
-<!--                        </form>-->
-                    </li>
-                    <li class="nav-item" style="margin-left: 15px">
-                    </li>
-                </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px">
+                        <li class="nav-item" style="margin-left: 10px">
+                            <!--                        <form action="/logout">-->
+                            <!--                        <form th:action="@{auth/logout}" method="post">-->
+                            <!--                        <form action="/logout">-->
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="btn btn-primary">Выйти</button>
+                            </form>
+                            <!--                        <form th:action="@{/logout}" method="post">-->
+                            <!--                            <input type="submit" value="Sign Out"/>-->
+                            <!--                        </form>-->
+                        </li>
+                        <li class="nav-item" style="margin-left: 15px">
+                        </li>
+                    </ul>
                 </div>
-<!--                <div sec:authorize="isAuthenticated()">-->
-<!--                <form class="d-flex" th:action="@{search}" method="post">-->
-<!--                    <input class="form-control mr-2" type="search" placeholder="Search your Ticket" aria-label="Search">-->
-<!--                    <button class="btn btn-outline-secondary" type="submit">Search</button>-->
-<!--                </form>-->
-<!--                </div>-->
+                <!--                <div sec:authorize="isAuthenticated()">-->
+                <!--                <form class="d-flex" th:action="@{search}" method="post">-->
+                <!--                    <input class="form-control mr-2" type="search" placeholder="Search your Ticket" aria-label="Search">-->
+                <!--                    <button class="btn btn-outline-secondary" type="submit">Search</button>-->
+                <!--                </form>-->
+                <!--                </div>-->
             </div>
         </div>
     </nav>
@@ -159,16 +165,28 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-3">
+<!--                sm 3 times changed to 2-8-2-->
             </div>
-            <div class="col-sm">
+            <div class="col-6">
                 <div layout:fragment="content_part">
 
-<!--СЮДА БУДЕТ ВСТАВЛЯТЬСЯ КОД-->
+                    <!--СЮДА БУДЕТ ВСТАВЛЯТЬСЯ КОД-->
 
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-3">
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <br>
+                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="put">
+                                <button type="submit" class="btn btn-outline-secondary">Изменить</button>
+                            </form>
+                            <br>
+                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="delete">
+                            <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                            </form>
+                            <br>
+                        </div>
             </div>
         </div>
     </div>
