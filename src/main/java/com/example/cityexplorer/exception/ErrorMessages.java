@@ -21,6 +21,7 @@ public enum ErrorMessages {
     NULL_ATTRACTION_OBJECT("Attraction object should not be null"),
     NULL_CITY_ID("City id should not be null"),
     NULL_CITY_OBJECT("City object should not be null"),
+    NULL_CITY_PHOTO_OBJECT("CityPhoto object should not be null"),
     NULL_EVENT_ID("Event id should not be null"),
     NULL_EVENT_OBJECT("Event object should not be null"),
     NULL_FOOD_PLACE_ID("Food place id should not be null"),
