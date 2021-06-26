@@ -7,6 +7,7 @@ import com.example.cityexplorer.model.Event;
 import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.Hotel;
 import com.example.cityexplorer.model.Transport;
+import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.AttractionService;
 import com.example.cityexplorer.service.CityPhotoService;
 import com.example.cityexplorer.service.CityService;
@@ -15,6 +16,7 @@ import com.example.cityexplorer.service.FoodPlaceService;
 import com.example.cityexplorer.service.HotelService;
 import com.example.cityexplorer.service.TransportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +55,9 @@ public class HomeController {
     }
 
     @GetMapping
-    public String openMainPageAndLoadDefaultCity(Model model){
+    public String openMainPageAndLoadDefaultCity(@AuthenticationPrincipal User user, Model model){
+        model.addAttribute("user", user);
+
         City city = cityService.getById(1L);
         model.addAttribute("city", city);
 
