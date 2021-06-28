@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/cities/{cityId}/hotels")
 public class HotelController {
 
     private final HotelService hotelService;
@@ -28,7 +27,6 @@ public class HotelController {
     }
 
     @GetMapping("/cities/{cityId}/hotels")
-//    @GetMapping
     public String getList(
             @PathVariable("cityId") City city,
             @AuthenticationPrincipal User user,
@@ -36,7 +34,6 @@ public class HotelController {
         List<Hotel> hotels = hotelService.getList(city);
         model.addAttribute("hotels", hotels);
         model.addAttribute("city", city);
-        model.addAttribute("isAdmin",user.isAdmin());
         return "hotels";
     }
 }
