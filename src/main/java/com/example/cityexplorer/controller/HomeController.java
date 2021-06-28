@@ -56,7 +56,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String openMainPageAndLoadDefaultCity(
+    public String openMainPageWithDefaultCity(
             @RequestParam(name = "id", required = false) Long id,
             Model model) {
 
