@@ -1,10 +1,12 @@
 package com.example.cityexplorer.model;
 
+import com.example.cityexplorer.exception.ErrorMessages;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.Assert;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -104,6 +106,7 @@ public class User implements UserDetails {
     }
 
     public boolean isAdmin() {
+        Assert.notNull(roles, ErrorMessages.NULL_USER_ROLES.getErrorMessage());
         return roles.contains(Role.ADMIN);
     }
 }

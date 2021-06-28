@@ -12,6 +12,7 @@ public enum ErrorMessages {
     NULL_USER_ID("User id should not be null"),
     NULL_USERNAME("Username should not be null"),
     NULL_USER_OBJECT("User object should not be null"),
+    NULL_USER_ROLES("User roles should not be null"),
     NULL_USER_AUTHORITIES("User authorities should not be null"),
     NULL_PASSWORD_DATA("Password data should not be null"),
     NULL_TIMESTAMP("Timestamp should not be null"),
