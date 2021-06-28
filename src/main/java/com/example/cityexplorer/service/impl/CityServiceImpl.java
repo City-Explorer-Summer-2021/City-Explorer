@@ -1,5 +1,6 @@
 package com.example.cityexplorer.service.impl;
 
+import com.example.cityexplorer.dto.CityDto;
 import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.exception.NotFoundException;
 import com.example.cityexplorer.model.City;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
@@ -36,9 +38,30 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional(readOnly = true)
     @NotNull
-    public List<City> getOrderedByNameList() {
+    public LinkedHashMap<CityDto,String> getOrderedByNameMap() {
         log.info("Requested City list ordered by Name");
-        return cityRepository.findByOrderByNameAsc();
+        List<City> sortedCities =  cityRepository.findByOrderByNameAsc();
+
+        LinkedHashMap<CityDto, String> mapWhereCityAsValueFirstLetterAsKey = new LinkedHashMap<>();
+
+        if (sortedCities.size() > 0) {
+            mapWhereCityAsValueFirstLetterAsKey.put(
+                    new CityDto(sortedCities.get(0).getId(), sortedCities.get(0).getName()),
+                    sortedCities.get(0).getName().substring(0, 1));
+
+            for (int i = 1; i < sortedCities.size(); i++) {
+                String valueLetter = sortedCities.get(i).getName().substring(0, 1);
+                if (sortedCities.get(i - 1).getName().substring(0, 1).equals(valueLetter)) {
+                    valueLetter = " ";
+                }
+                mapWhereCityAsValueFirstLetterAsKey.put(
+                        new CityDto(sortedCities.get(i).getId(), sortedCities.get(i).getName()), valueLetter);
+            }
+        } else {
+            log.info("Cities list size is 0");
+        }
+
+        return mapWhereCityAsValueFirstLetterAsKey;
     }
 
     @Override
