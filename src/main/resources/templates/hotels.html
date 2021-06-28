@@ -29,14 +29,19 @@
                     <th>Категория</th>
                     <th>Адрес</th>
                     <th>Телефон</th>
+                    <th>Автор</th>
                 </tr>
               </thead>
               <th:block th:each="hotel : ${hotels}">
                 <tr>
-                    <td th:text="${hotel.name}">Название</td>
+                    <td>
+                        <a th:href="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                           th:text="${hotel.name}">Название</a>
+                    </td>
                     <td th:text="${hotel.hotelCategory.name}">Категория</td>
                     <td th:text="${hotel.address}">Адрес</td>
                     <td th:text="${hotel.phone}">Телефон</td>
+                    <td th:text="${hotel.user.firstName} + ' ' + ${hotel.user.lastName}">Автор</td>
                 </tr>
             </th:block>
           </table>

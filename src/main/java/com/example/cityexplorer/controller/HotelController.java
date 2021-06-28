@@ -36,4 +36,15 @@ public class HotelController {
         model.addAttribute("city", city);
         return "hotels";
     }
+
+    @GetMapping("/cities/{cityId}/hotels/{hotelId}")
+    public String getHotelPage(
+            @PathVariable("cityId") City city,
+            @PathVariable("hotelId") Hotel hotel,
+            @AuthenticationPrincipal User user,
+            Model model) {
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("city", city);
+        return "hotel";
+    }
 }
