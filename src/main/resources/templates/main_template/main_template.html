@@ -41,35 +41,18 @@
                     </div>
                     <div sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
-                            <!--                            <a class="nav-link active" aria-current="page" href="/auth/login">Войти в систему</a>-->
                             <a class="nav-link active" aria-current="page" href="/login">Войти в систему</a>
                         </li>
                     </div>
                     <div sec:authorize="hasAuthority('ADMIN')">
-                        <a class="nav-link active" aria-current="page" href="/city/add">Добавить город</a>
+                        <a class="nav-link active" aria-current="page" href="/cities/add" >Добавить город</a>
                     </div>
 
                     <li class="navbar-text">
-                            <span class="text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Текущий город:</span>
                     </li>
-
-                    <!--                    <li class="nav-item">-->
-                    <!--                        <div th:object = "${city}">-->
-
-                    <!--&lt;!&ndash;                            <h3 style="alignment: center; margin-top: 15px;"&ndash;&gt;-->
-                    <!--&lt;!&ndash;                                                                 th:text="*{name}">Город</h3>&ndash;&gt;-->
-                    <!--                            <a class="nav-link active" aria-current="page" href="/" th:text="*{name}" data-target="#staticBackdrop">ГОРОД</a>-->
-                    <!--                        </div>-->
-                    <!--                    </li>-->
-
-
-
-                    <!-- Button trigger modal -->
-                    <!--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
-                    <!--                        Launch static backdrop modal-->
-                    <!--                    </button>-->
 
                     <li class="nav-item">
                         <div th:object = "${cityDto}">
@@ -91,11 +74,33 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+<!--                                    <table>-->
+<!--                                        <tr th:each="city : ${allCities}">-->
+<!--                                            <td th:text="${city.name}">Город</td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+<!--                                    <table>-->
+<!--                                        <tr th:each="mapItem : ${allCities}">-->
+<!--&lt;!&ndash;                                            <td th:text="${mapItem.value}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <td th:text="${mapItem.key.name}"></td>&ndash;&gt;-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
                                     <table>
-                                        <tr th:each="city : ${allCities}">
-                                            <td th:text="${city.name}">Город</td>
+                                        <th:block th:each="pair : ${allCities}">
+                                        <tr>
+                                            <td th:text="${pair.value}" style="color: red; font-size: 20px; font-weight: 700"></td>
                                         </tr>
+<!--                                            <tr>-->
+<!--                                                <td th:text="${#maps.}" style="color: red; font-size: 20px"></td>-->
+<!--                                            </tr>-->
+                                            <tr>
+<!--                                                <a th:href="@{/ticket_machine/ticket_info/{id}(id=${ticket.id})}" th:text="${ticket.id}"/>-->
+<!--                                                <td th:text="${pair.key.name}"></td>-->
+                                                <td><a th:href="@{/?id={id}(id=${pair.key.id})}" th:text="${pair.key.name}"/></td>
+                                            </tr>
+                                        </th:block>
                                     </table>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -123,7 +128,7 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/ticket_machine">My Tickets</a></li>
+                                <li><a class="dropdown-item" href="/ticket_machine">Мой профиль</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -137,15 +142,9 @@
                 <div sec:authorize="isAuthenticated()">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px">
                         <li class="nav-item" style="margin-left: 10px">
-                            <!--                        <form action="/logout">-->
-                            <!--                        <form th:action="@{auth/logout}" method="post">-->
-                            <!--                        <form action="/logout">-->
                             <form th:action="@{/logout}" method="post">
                                 <button type="submit" class="btn btn-primary">Выйти</button>
                             </form>
-                            <!--                        <form th:action="@{/logout}" method="post">-->
-                            <!--                            <input type="submit" value="Sign Out"/>-->
-                            <!--                        </form>-->
                         </li>
                         <li class="nav-item" style="margin-left: 15px">
                         </li>
@@ -178,6 +177,7 @@
             <div class="col-3">
                         <div sec:authorize="hasAuthority('ADMIN')">
                             <br>
+                            <span th:if="${city != null}">
                             <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="put">
                                 <button type="submit" class="btn btn-outline-secondary">Изменить</button>
                             </form>
@@ -185,6 +185,7 @@
                             <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="delete">
                             <button type="submit" class="btn btn-outline-danger">Удалить</button>
                             </form>
+                            </span>
                             <br>
                         </div>
             </div>
@@ -193,22 +194,6 @@
 </main>
 
 <div class="container" style="margin-top: 100px"></div>
-<!--<footer class="mb-auto text-white-50">-->
-<!--    <nav class="navbar fixed-bottom navbar-dark" style="background-color: #1b1e21">-->
-<!--        <div class="container" >-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm">-->
-<!--                </div>-->
-<!--                <div class="col-sm">-->
-<!--                    <p>&copy; 2021-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--                <div class="col-sm">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </nav>-->
-<!--</footer>-->
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
