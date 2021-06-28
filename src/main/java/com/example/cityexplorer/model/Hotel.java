@@ -51,4 +51,8 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HotelPhoto> photos;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
