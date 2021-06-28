@@ -1,5 +1,6 @@
 package com.example.cityexplorer.controller;
 
+import com.example.cityexplorer.dto.CityDto;
 import com.example.cityexplorer.model.Attraction;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.CityPhoto;
@@ -19,11 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
-@RequestMapping(value={"/", "/home"})
+@RequestMapping(value = {"/", "/home"})
 public class HomeController {
 
     private final CityService cityService;
@@ -42,7 +45,7 @@ public class HomeController {
             HotelService hotelService,
             AttractionService attractionService,
             EventService eventService,
-            FoodPlaceService foodPlaceService){
+            FoodPlaceService foodPlaceService) {
         this.cityService = cityService;
         this.cityPhotoService = cityPhotoService;
         this.transportService = transportService;
@@ -53,9 +56,17 @@ public class HomeController {
     }
 
     @GetMapping
-    public String openMainPageAndLoadDefaultCity(Model model){
-        City city = cityService.getById(1L);
+    public String openMainPageWithDefaultCity(
+            @RequestParam(name = "id", required = false) Long id,
+            Model model) {
+
+        City city = cityService.getById(Objects.requireNonNullElse(id, 1L));
         model.addAttribute("city", city);
+
+        if(id != null){
+            CityDto cityDto = new CityDto(city.getId(), city.getName());
+            model.addAttribute("cityDto", cityDto);
+        }
 
         List<CityPhoto> cityPhotos = cityPhotoService.getList(city);
         model.addAttribute("cityPhotos", cityPhotos);

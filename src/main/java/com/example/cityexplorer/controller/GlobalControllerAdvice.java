@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.List;
+import java.util.LinkedHashMap;
 
 @ControllerAdvice
 public class GlobalControllerAdvice {
@@ -27,8 +27,7 @@ public class GlobalControllerAdvice {
             CityDto cityDto = new CityDto(city.getId(), city.getName());
             model.addAttribute("cityDto", cityDto);
 
-            List<City> allCities = cityService.getOrderedByNameList();
+            LinkedHashMap<CityDto,String> allCities = cityService.getOrderedByNameMap();
             model.addAttribute("allCities", allCities);
-
         }
 }

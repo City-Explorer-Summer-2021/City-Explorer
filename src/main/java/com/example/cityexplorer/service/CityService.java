@@ -1,14 +1,16 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.dto.CityDto;
 import com.example.cityexplorer.model.City;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface CityService {
 
     List<City> getList();
 
-    List<City> getOrderedByNameList();
+    LinkedHashMap<CityDto,String> getOrderedByNameMap();
 
     City getById(Long id);
 
