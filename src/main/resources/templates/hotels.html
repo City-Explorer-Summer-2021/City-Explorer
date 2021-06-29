@@ -30,6 +30,7 @@
                     <th>Адрес</th>
                     <th>Телефон</th>
                     <th>Автор</th>
+                    <th colspan="2" th:if="${currentUser != null}"></th>
                 </tr>
               </thead>
               <th:block th:each="hotel : ${hotels}">
@@ -42,12 +43,32 @@
                     <td th:text="${hotel.address}">Адрес</td>
                     <td th:text="${hotel.phone}">Телефон</td>
                     <td th:text="${hotel.user.firstName} + ' ' + ${hotel.user.lastName}">Автор</td>
+                        <td th:if="${currentUser != null}" style="text-align: center">
+                            <a th:if="${hotel.user == currentUser}"
+                               th:href="@{'/cities/{city_id}/hotels/{hotel_id}/edit'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                               class="btn btn-outline-primary">
+                               <i class="fa fa-edit" style="font-size: 20px;"></i>
+                            </a>
+                        </td>
+                        <td th:if="${currentUser != null}">
+                            <form th:if="${hotel.user == currentUser}"
+                                  th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                                  th:method="delete">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-trash" style="font-size: 20px;"></i>
+                                </button>
+                            </form>
+                        </td>
                 </tr>
             </th:block>
           </table>
             </span>
         </tr>
     </div>
+
+    <a th:if="${currentUser != null}"
+       th:href="@{'/cities/{city_id}/hotels/add'(city_id=${city.id})}"
+       class="btn btn-outline-primary">Добавить</a>
 
 </div>
 </body>

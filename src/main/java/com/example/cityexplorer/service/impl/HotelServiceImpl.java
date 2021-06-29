@@ -64,10 +64,10 @@ public class HotelServiceImpl implements HotelService {
         Assert.notNull(id, ErrorMessages.NULL_HOTEL_ID.getErrorMessage());
         Assert.notNull(hotel, ErrorMessages.NULL_HOTEL_OBJECT.getErrorMessage());
 
-        getById(id);
+        Hotel fetched = getById(id);
 
         log.info("Updating the Hotel with id: {}", id);
-        hotel.setId(id);
+        hotel.setPhotos(fetched.getPhotos());
 
         return hotelRepository.save(hotel);
     }
