@@ -7,20 +7,52 @@
 <body>
 <div layout:fragment="content_part">
 
-    <h2 th:if="${hotel.id == null}">Здесь вводить новый отель</h2>
-    <h2 th:if="${hotel.id != null}">Здесь будем редактировать отель</h2>
-
-    <div th:object = "${hotel}">
-        <div style="text-align: center;">
-            <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название отеля</h5>
-            <p><span th:text="*{hotelCategory.name}">Категория жилья</span></p>
-            <p><span th:text="*{description}">Описание</span></p>
-            <p><span th:text="'Адрес: ' + *{address}">Адрес</span></p>
-            <p><span th:text="'тел. ' + *{phone}">Телефон</span></p>
-            <p><span th:text="'Автор: ' + *{user.firstName} + ' ' + *{user.lastName}">Автор объявления</span></p>
+    <form class="form-horizontal" th:object="${hotel}"
+          th:action="${isNew ?
+            '/cities/' + city.id + '/hotels' :
+            '/cities/' + city.id + '/hotels/' + hotel.id}"
+          th:method="${isNew ? 'post' : 'put'}"
+          name="hotel_edit" id="hotel_edit" method="post" role="form">
+        <div class="form-group">
+            <input type="hidden" id="id" th:name="id" th:field="*{id}"/>
         </div>
-        <h5>Здесь должны быть фото</h5>
-    </div>
+        <div class="form-group">
+            <input type="hidden" id="user" th:name="user" th:field="*{user.id}"/>
+        </div>
+        <div class="form-group">
+            <input type="hidden" id="city" th:name="city" th:field="*{city.id}"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Название: </label>
+            <input type="text" class="form-control" id="name" th:name="name" th:field="*{name}" maxlength="255"/>
+        </div>
+        <div class="form-group">
+            <label for="hotelCategory">Категория: </label>
+            <select class="form-control" name="hotelCategory" id="hotelCategory" th:field="*{hotelCategory}">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:selected="${category.id == hotel.hotelCategory}"
+                        th:text="${category.name}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание: </label>
+            <textarea class="form-control" rows="10" name="description" id="description"
+                      th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="name">Адрес: </label>
+            <input type="text" class="form-control" id="address" th:name="address" th:field="*{address}"
+                   maxlength="255"/>
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон: </label>
+            <input type="text" class="form-control" id="phone" th:name="phone" th:field="*{phone}" maxlength="255"/>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
 
 </div>
 </body>

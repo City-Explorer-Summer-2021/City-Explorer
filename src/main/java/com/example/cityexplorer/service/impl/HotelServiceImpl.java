@@ -33,7 +33,7 @@ public class HotelServiceImpl implements HotelService {
         Assert.notNull(city, ErrorMessages.NULL_CITY_OBJECT.getErrorMessage());
 
         log.info("Requested Hotel list for {} ({})", city.getName(), city.getId());
-        return hotelRepository.findAllByCity(city);
+        return hotelRepository.findAllByCityOrderById(city);
     }
 
     @Override

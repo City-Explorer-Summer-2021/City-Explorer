@@ -169,7 +169,7 @@
             <div class="col-3">
 <!--                sm 3 times changed to 2-8-2-->
             </div>
-            <div class="col-6">
+            <div class="col-8">
                 <div layout:fragment="content_part">
 
                     <!--СЮДА БУДЕТ ВСТАВЛЯТЬСЯ КОД-->
@@ -177,19 +177,19 @@
                 </div>
             </div>
             <div class="col-3">
-                        <div sec:authorize="hasAuthority('ADMIN')">
-                            <br>
-                            <span th:if="${city != null}">
-                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="put">
-                                <button type="submit" class="btn btn-outline-secondary">Изменить</button>
-                            </form>
-                            <br>
-                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="delete">
-                            <button type="submit" class="btn btn-outline-danger">Удалить</button>
-                            </form>
-                            </span>
-                            <br>
-                        </div>
+<!--                        <div sec:authorize="hasAuthority('ADMIN')">-->
+<!--                            <br>-->
+<!--                            <span th:if="${city != null}">-->
+<!--                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="put">-->
+<!--                                <button type="submit" class="btn btn-outline-secondary">Изменить</button>-->
+<!--                            </form>-->
+<!--                            <br>-->
+<!--                            <form th:action="@{'/cities/{id}'(id=${city.id})}" th:method="delete">-->
+<!--                            <button type="submit" class="btn btn-outline-danger">Удалить</button>-->
+<!--                            </form>-->
+<!--                            </span>-->
+<!--                            <br>-->
+<!--                        </div>-->
             </div>
         </div>
     </div>
