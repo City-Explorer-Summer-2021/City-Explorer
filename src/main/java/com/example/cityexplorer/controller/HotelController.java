@@ -51,6 +51,7 @@ public class HotelController {
         model.addAttribute("currentUser", user);
         model.addAttribute("hotel", hotel);
         model.addAttribute("city", city);
+        model.addAttribute("isDeleting", false);
         return "hotel";
     }
 
@@ -82,6 +83,19 @@ public class HotelController {
         model.addAttribute("isNew", true);
         model.addAttribute("categories", hotelCategoryService.getList());
         return "hotel_edit";
+    }
+
+    @GetMapping("/cities/{cityId}/hotels/{hotelId}/delete")
+    public String getHotelDeletePage(
+            @PathVariable("cityId") City city,
+            @PathVariable("hotelId") Hotel hotel,
+            @AuthenticationPrincipal User user,
+            Model model) {
+        model.addAttribute("currentUser", user);
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("city", city);
+        model.addAttribute("isDeleting", true);
+        return "hotel";
     }
 
     @PostMapping("/cities/{cityId}/hotels")
