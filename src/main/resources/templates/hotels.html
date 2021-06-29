@@ -51,13 +51,18 @@
                         </a>
                     </td>
                     <td th:if="${currentUser != null}" style="text-align: center">
-                        <form th:if="${hotel.user == currentUser}"
-                              th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
-                              th:method="delete" method="post">
-                            <button type="submit" class="btn btn-outline-danger">
-                                <i class="fa fa-trash" style="font-size: 20px;"></i>
-                            </button>
-                        </form>
+                        <a th:if="${hotel.user == currentUser}"
+                           th:href="@{'/cities/{city_id}/hotels/{hotel_id}/delete'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                           class="btn btn-outline-danger">
+                           <i class="fa fa-trash" style="font-size: 20px;"></i>
+                        </a>
+<!--                        <form th:if="${hotel.user == currentUser}"-->
+<!--                              th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"-->
+<!--                              th:method="delete" method="post">-->
+<!--                            <button type="submit" class="btn btn-outline-danger">-->
+<!--                                <i class="fa fa-trash" style="font-size: 20px;"></i>-->
+<!--                            </button>-->
+<!--                        </form>-->
                     </td>
                 </tr>
             </th:block>

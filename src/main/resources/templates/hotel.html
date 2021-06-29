@@ -7,6 +7,24 @@
 <body>
 <div layout:fragment="content_part">
 
+    <div th:if="${isDeleting && hotel.user == currentUser}" style="alignment: center; margin-top: 15px;">
+        <form th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
+              th:method="delete" method="post">
+            <span th:text="${'Удалить ' + hotel.name + '?'}" class="h4" >
+                Удалить жилье?
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <a th:href="@{'/cities/{city_id}/hotels'(city_id=${city.id})}" class="btn btn-outline-primary">
+                Отмена
+            </a>
+            &nbsp;&nbsp;
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 20px;"></i> Удалить
+            </button>
+        </form>
+        <br><hr><br>
+    </div>
+
     <div th:object = "${hotel}">
         <div style="text-align: center;">
             <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название отеля</h5>
