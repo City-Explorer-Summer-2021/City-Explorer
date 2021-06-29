@@ -3,8 +3,8 @@ package com.example.cityexplorer.controller;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Hotel;
 import com.example.cityexplorer.model.User;
+import com.example.cityexplorer.service.HotelCategoryService;
 import com.example.cityexplorer.service.HotelService;
-import com.example.cityexplorer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -22,12 +21,13 @@ import java.util.List;
 public class HotelController {
 
     private final HotelService hotelService;
-    private final UserService userService;
+    private final HotelCategoryService hotelCategoryService;
 
     @Autowired
-    public HotelController(HotelService hotelService, UserService userService) {
+    public HotelController(HotelService hotelService,
+                           HotelCategoryService hotelCategoryService) {
         this.hotelService = hotelService;
-        this.userService = userService;
+        this.hotelCategoryService = hotelCategoryService;
     }
 
     @GetMapping("/cities/{cityId}/hotels")
@@ -63,6 +63,8 @@ public class HotelController {
         model.addAttribute("currentUser", user);
         model.addAttribute("hotel", hotel);
         model.addAttribute("city", city);
+        model.addAttribute("isNew", false);
+        model.addAttribute("categories", hotelCategoryService.getList());
         return "hotel_edit";
     }
 
@@ -77,21 +79,23 @@ public class HotelController {
         hotel.setUser(user);
         model.addAttribute("hotel", hotel);
         model.addAttribute("city", city);
+        model.addAttribute("isNew", true);
+        model.addAttribute("categories", hotelCategoryService.getList());
         return "hotel_edit";
     }
 
     @PostMapping("/cities/{cityId}/hotels")
     public String saveNewHotel(@AuthenticationPrincipal User user,
                                @PathVariable("cityId") Long cityId,
-                               @RequestBody Hotel hotel) {
+                               Hotel hotel) {
         hotelService.save(hotel);
         return String.format("redirect:/cities/%d/hotels", hotel.getCity().getId());
     }
 
-    @PutMapping("/cities/{cityId}/hotels/{hotelId}")
+    @PutMapping(value = "/cities/{cityId}/hotels/{hotelId}")
     public String updateHotel(@PathVariable("cityId") Long cityId,
                               @PathVariable("hotelId") Long hotelId,
-                              @RequestBody Hotel hotel) {
+                              Hotel hotel) {
         hotelService.update(hotelId, hotel);
         return String.format("redirect:/cities/%d/hotels", cityId);
     }

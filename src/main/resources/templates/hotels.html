@@ -7,7 +7,7 @@
 <body>
 <div layout:fragment="content_part">
 
-    <div th:object = "${city}">
+    <div th:object="${city}">
         <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;"
                                              th:text="*{name}">Город</h3></div>
         <br>
@@ -15,7 +15,7 @@
 
     <br><br>
 
-    <div th:object = "${hotels}">
+    <div th:object="${hotels}">
         <h4>Жильё:</h4>
         <tr class="align-middle">
           <span th:if="${hotels.size() == 0}">
@@ -43,22 +43,22 @@
                     <td th:text="${hotel.address}">Адрес</td>
                     <td th:text="${hotel.phone}">Телефон</td>
                     <td th:text="${hotel.user.firstName} + ' ' + ${hotel.user.lastName}">Автор</td>
-                        <td th:if="${currentUser != null}" style="text-align: center">
-                            <a th:if="${hotel.user == currentUser}"
-                               th:href="@{'/cities/{city_id}/hotels/{hotel_id}/edit'(city_id=${city.id}, hotel_id=${hotel.id})}"
-                               class="btn btn-outline-primary">
-                               <i class="fa fa-edit" style="font-size: 20px;"></i>
-                            </a>
-                        </td>
-                        <td th:if="${currentUser != null}">
-                            <form th:if="${hotel.user == currentUser}"
-                                  th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
-                                  th:method="delete">
-                                <button type="submit" class="btn btn-outline-danger">
-                                    <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                </button>
-                            </form>
-                        </td>
+                    <td th:if="${currentUser != null}" style="text-align: center">
+                        <a th:if="${hotel.user == currentUser}"
+                           th:href="@{'/cities/{city_id}/hotels/{hotel_id}/edit'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                           class="btn btn-outline-primary">
+                           <i class="fa fa-edit" style="font-size: 20px;"></i>
+                        </a>
+                    </td>
+                    <td th:if="${currentUser != null}" style="text-align: center">
+                        <form th:if="${hotel.user == currentUser}"
+                              th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
+                              th:method="delete" method="post">
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="fa fa-trash" style="font-size: 20px;"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </th:block>
           </table>
