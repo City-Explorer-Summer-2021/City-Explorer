@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+    <div th:object = "${event}">
+        <div style="text-align: center;">
+            <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Мероприятия</h5>
+            <p><span th:text="*{description}">Описание</span></p>
+            <p><span th:text="'Адрес: ' + *{address}">Адрес</span></p>
+            <p><span th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm:ss')}">Дата начала</span></p>
+            <p><span th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm:ss')}">Дата окончания</span></p>
+        </div>
+        <h5>Здесь должны быть фото</h5>
+    </div>
+
+</div>
+</body>
+</html>

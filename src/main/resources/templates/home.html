@@ -95,7 +95,7 @@
                 <p th:text="'Информации о Доступном жилье пока что нет'">Информации о Доступном жилье пока что нет</p>
             </span>
             <h5><a th:href="@{'/cities/{id}/hotels/'(id=${city.id})}"
-                   th:text="'Отели города ' + ${city.name} + ': ' + ${hotels.size()}"> (Отели test link)</a></h5>
+                   th:text="'Отели города ' + ${city.name} + ': ' + ${hotels.size()}">Отели</a></h5>
         </div>
     </div>
 
@@ -104,14 +104,26 @@
     <div th:object="${attractions}">
         <h4 align="center">Достопримечательности:</h4>
         <br>
+
+
         <div class="align-middle">
-            <span th:if="${attractions.size() == 0 && (user == null || !user.isAdmin())}">
+<!--            <span th:if="${attractions.size() == 0 && (user == null || !user.isAdmin())}">-->
+<!--                <p th:text="'Информации о Достопримечательностях пока что нет'">Информации о Достопримечательностях пока что нет</p>-->
+<!--            </span>-->
+<!--            <span th:if="${attractions.size() > 0 || (user != null && user.isAdmin())}">-->
+<!--                <h5><a th:href="@{'/cities/{id}/attractions/'(id=${city.id})}"-->
+<!--                       th:text="'Достопримечатльности ' + ${city.name} + ': ' + ${attractions.size()}"> Достопримечательности</a></h5>-->
+<!--            </span>-->
+
+            <div class="align-middle">
+            <span th:if="${attractions.size() == 0 && user == null}">
                 <p th:text="'Информации о Достопримечательностях пока что нет'">Информации о Достопримечательностях пока что нет</p>
             </span>
-            <span th:if="${attractions.size() > 0 || (user != null && user.isAdmin())}">
                 <h5><a th:href="@{'/cities/{id}/attractions/'(id=${city.id})}"
-                       th:text="'Достопримечатльности ' + ${city.name} + ': ' + ${attractions.size()}"> Достопримечательности</a></h5>
-            </span>
+                       th:text="'Достопримечательности города ' + ${city.name} + ': ' + ${attractions.size()}">Достопримечательности</a></h5>
+            </div>
+
+
         </div>
     </div>
 
@@ -120,16 +132,27 @@
     <div th:object="${events}">
         <h4 align="center">Массовые мероприятия:</h4>
         <br>
-        <div class="align-middle">
-          <span th:if="${events.size() == 0}">
-            <td th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</td>
-              <h5><a th:href="@{/events/{id}(id=${city.id})}" th:text="'Массовые мероприятия города: ' + ${city.name}"> (Массовые мероприятия test link)</a></h5>
-            </span>
+<!--        <div class="align-middle">-->
+<!--          <span th:if="${events.size() == 0}">-->
+<!--            <td th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</td>-->
+<!--              <h5><a th:href="@{/events/{id}(id=${city.id})}" th:text="'Массовые мероприятия города: ' + ${city.name}"> (Массовые мероприятия test link)</a></h5>-->
+<!--            </span>-->
 
-            <span th:unless="${events.size() == 0}">
-              <h5><a th:href="@{/events/{id}(id=${city.id})}" th:text="'Массовые мероприятия города: ' + ${city.name}"> Массовые мероприятия</a></h5>
+<!--            <span th:unless="${events.size() == 0}">-->
+<!--              <h5><a th:href="@{/events/{id}(id=${city.id})}" th:text="'Массовые мероприятия города: ' + ${city.name}"> Массовые мероприятия</a></h5>-->
+<!--            </span>-->
+<!--        </div>-->
+
+
+        <div class="align-middle">
+            <span th:if="${events.size() == 0 && user == null}">
+                <p th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</p>
             </span>
+            <h5><a th:href="@{'/cities/{id}/events/'(id=${city.id})}"
+                   th:text="'Массовые мероприятия города ' + ${city.name} + ': ' + ${events.size()}">Массовые Мероприятия</a></h5>
         </div>
+
+
     </div>
 
     <br><br>
@@ -137,16 +160,25 @@
     <div th:object="${foodPlaces}">
         <h4 align="center">Места питания:</h4>
         <br>
-        <div class="align-middle">
-          <span th:if="${foodPlaces.size() == 0}">
-            <td th:text="'Информации о Местах питания пока что нет'">Информации о Местах питания пока что нет</td>
-              <h5><a th:href="@{/foodplaces/{id}(id=${city.id})}" th:text="'Точки питания города: ' + ${city.name}"> (Точки питания test link)</a></h5>
-            </span>
+<!--        <div class="align-middle">-->
+<!--          <span th:if="${foodPlaces.size() == 0}">-->
+<!--            <td th:text="'Информации о Местах питания пока что нет'">Информации о Местах питания пока что нет</td>-->
+<!--              <h5><a th:href="@{/foodplaces/{id}(id=${city.id})}" th:text="'Точки питания города: ' + ${city.name}"> (Точки питания test link)</a></h5>-->
+<!--            </span>-->
 
-            <span th:unless="${foodPlaces.size() == 0}">
- <h5><a th:href="@{/foodplaces/{id}(id=${city.id})}" th:text="'Точки питания города: ' + ${city.name}">Точки питания</a></h5>
+<!--            <span th:unless="${foodPlaces.size() == 0}">-->
+<!--                <h5><a th:href="@{/foodplaces/{id}(id=${city.id})}" th:text="'Точки питания города: ' + ${city.name}">Точки питания</a></h5>-->
+<!--            </span>-->
+<!--        </div>-->
+
+        <div class="align-middle">
+            <span th:if="${foodPlaces.size() == 0 && user == null}">
+                <p th:text="'Информации о Местах питания пока что нет'">Информации о Местах питания пока что нет</p>
             </span>
+            <h5><a th:href="@{'/cities/{id}/foodPlaces/'(id=${city.id})}"
+                   th:text="'Места питания города ' + ${city.name} + ': ' + ${foodPlaces.size()}">Местапитания</a></h5>
         </div>
+
     </div>
 
 </div>
