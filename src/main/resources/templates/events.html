@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+    <div th:object = "${city}">
+        <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;"
+                                             th:text="*{name}">Город</h3></div>
+        <br>
+    </div>
+
+    <br><br>
+
+    <div th:object = "${events}">
+        <h4>Массовые мероприятия:</h4>
+        <tr class="align-middle">
+          <span th:if="${events.size() == 0}">
+            <td th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</td>
+          </span>
+            <span th:if="${events.size() > 0}">
+          <table table class="table table-secondary table-striped table-hover table-bordered">
+              <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Адрес</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                </tr>
+              </thead>
+              <th:block th:each="event : ${events}">
+                <tr>
+                    <td>
+                        <a th:href="@{'/cities/{city_id}/events/{event_id}'(city_id=${city.id}, event_id=${event.id})}"
+                           th:text="${event.name}">Название</a>
+                    </td>
+                    <td th:text="${event.description}">Описание</td>
+                    <td th:text="${event.address}">Адрес</td>
+                    <td th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm:ss')}">Дата начала</td>
+                    <td th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm:ss')}">Дата окончания</td>
+                </tr>
+            </th:block>
+          </table>
+            </span>
+        </tr>
+    </div>
+
+</div>
+</body>
+</html>
