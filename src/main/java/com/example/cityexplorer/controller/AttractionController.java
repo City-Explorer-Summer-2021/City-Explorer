@@ -38,7 +38,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/{attractionId}")
-    public String getHotelPage(
+    public String getAttractionPage(
             @PathVariable("cityId") City city,
             @PathVariable("attractionId") Attraction attraction,
             @AuthenticationPrincipal User user,

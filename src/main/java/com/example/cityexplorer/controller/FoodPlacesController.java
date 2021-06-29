@@ -41,7 +41,7 @@ public class FoodPlacesController {
     }
 
     @GetMapping("/cities/{cityId}/foodPlaces/{foodPlaceId}")
-    public String getHotelPage(
+    public String getFoodPlacePage(
             @PathVariable("cityId") City city,
             @PathVariable("foodPlaceId") FoodPlace foodPlace,
             @AuthenticationPrincipal User user,

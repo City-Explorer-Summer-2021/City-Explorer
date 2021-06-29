@@ -38,7 +38,7 @@ public class EventsController {
     }
 
     @GetMapping("/cities/{cityId}/events/{eventId}")
-    public String getHotelPage(
+    public String getEventPage(
             @PathVariable("cityId") City city,
             @PathVariable("eventId") Event event,
             @AuthenticationPrincipal User user,
