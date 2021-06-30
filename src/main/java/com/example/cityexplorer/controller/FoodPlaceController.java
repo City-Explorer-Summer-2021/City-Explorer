@@ -1,9 +1,9 @@
 package com.example.cityexplorer.controller;
 
-import com.example.cityexplorer.model.Attraction;
 import com.example.cityexplorer.model.City;
+import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.User;
-import com.example.cityexplorer.service.AttractionService;
+import com.example.cityexplorer.service.FoodPlaceService;
 import com.example.cityexplorer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,97 +18,97 @@ import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 
 @Controller
-public class AttractionController {
+public class FoodPlaceController {
 
-    private final AttractionService attractionService;
+    private final FoodPlaceService foodPlaceService;
     private final UserService userService;
 
     @Autowired
-    public AttractionController(AttractionService attractionService, UserService userService) {
-        this.attractionService = attractionService;
+    public FoodPlaceController(FoodPlaceService foodPlaceService, UserService userService) {
+        this.foodPlaceService = foodPlaceService;
         this.userService = userService;
     }
 
-    @GetMapping("/cities/{cityId}/attractions")
+    @GetMapping("/cities/{cityId}/foodplaces")
     public String getList(
             @PathVariable("cityId") City city,
             @AuthenticationPrincipal User user,
             Model model) {
-        List<Attraction> attractions = attractionService.getList(city);
-        model.addAttribute("attractions", attractions);
+        List<FoodPlace> foodPlaces = foodPlaceService.getList(city);
+        model.addAttribute("foodPlaces", foodPlaces);
         model.addAttribute("city", city);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
-        return "attractions";
+        return "foodplaces";
     }
 
-    @GetMapping("/cities/{cityId}/attractions/{attractionId}")
-    public String getAttractionPage(
+    @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}")
+    public String getFoodPlacePage(
             @PathVariable("cityId") City city,
-            @PathVariable("attractionId") Attraction attraction,
+            @PathVariable("foodPlaceId") FoodPlace foodPlace,
             @AuthenticationPrincipal User user,
             Model model) {
-        model.addAttribute("attraction", attraction);
+        model.addAttribute("foodPlace", foodPlace);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", false);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
-        return "attraction";
+        return "foodplace";
     }
 
-    @GetMapping("/cities/{cityId}/attractions/{attractionId}/edit")
+    @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/edit")
     public String getHotelEditPage(
             @PathVariable("cityId") City city,
-            @PathVariable("attractionId") Attraction attraction,
+            @PathVariable("foodPlaceId") FoodPlace foodPlace,
             Model model) {
-        model.addAttribute("attraction", attraction);
+        model.addAttribute("foodPlace", foodPlace);
         model.addAttribute("city", city);
         model.addAttribute("isNew", false);
-        return "attraction_edit";
+        return "foodplace_edit";
     }
 
-    @GetMapping("/cities/{cityId}/attractions/add")
+    @GetMapping("/cities/{cityId}/foodplaces/add")
     public String getHotelAddPage(
             @PathVariable("cityId") City city,
             Model model) {
-        Attraction attraction = new Attraction();
-        attraction.setCity(city);
-        model.addAttribute("attraction", attraction);
+        FoodPlace foodPlace = new FoodPlace();
+        foodPlace.setCity(city);
+        model.addAttribute("foodPlace", foodPlace);
         model.addAttribute("city", city);
         model.addAttribute("isNew", true);
-        return "attraction_edit";
+        return "foodplace_edit";
     }
 
-    @GetMapping("/cities/{cityId}/attractions/{attractionId}/delete")
+    @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/delete")
     public String getHotelDeletePage(
             @PathVariable("cityId") City city,
-            @PathVariable("attractionId") Attraction attraction,
+            @PathVariable("foodPlaceId") FoodPlace foodPlace,
             @AuthenticationPrincipal User user,
             Model model) {
-        model.addAttribute("attraction", attraction);
+        model.addAttribute("foodPlace", foodPlace);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", true);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
-        return "attraction";
+        return "foodplace";
     }
 
-    @PostMapping("/cities/{cityId}/attractions")
+    @PostMapping("/cities/{cityId}/foodplaces")
     public String saveNewHotel(@PathVariable("cityId") Long cityId,
-                               Attraction attraction) {
-        attractionService.save(attraction);
-        return String.format("redirect:/cities/%d/attractions", cityId);
+                               FoodPlace foodPlace) {
+        foodPlaceService.save(foodPlace);
+        return String.format("redirect:/cities/%d/foodplaces", cityId);
     }
 
-    @PutMapping(value = "/cities/{cityId}/attractions/{attractionId}")
+    @PutMapping(value = "/cities/{cityId}/foodplaces/{foodPlaceId}")
     public String updateHotel(@PathVariable("cityId") Long cityId,
-                              @PathVariable("attractionId") Long attractionId,
-                              Attraction attraction) {
-        attractionService.update(attractionId, attraction);
-        return String.format("redirect:/cities/%d/attractions", cityId);
+                              @PathVariable("foodPlaceId") Long foodPlaceId,
+                              FoodPlace foodPlace) {
+        foodPlaceService.update(foodPlaceId, foodPlace);
+        return String.format("redirect:/cities/%d/foodplaces", cityId);
     }
 
-    @DeleteMapping("/cities/{cityId}/attractions/{attractionId}")
+    @DeleteMapping("/cities/{cityId}/foodplaces/{foodPlaceId}")
     public String deleteHotel(@PathVariable("cityId") Long cityId,
-                              @PathVariable("attractionId") Long attractionId) {
-        attractionService.delete(attractionId);
-        return String.format("redirect:/cities/%d/attractions", cityId);
+                              @PathVariable("foodPlaceId") Long foodPlaceId) {
+        foodPlaceService.delete(foodPlaceId);
+        return String.format("redirect:/cities/%d/foodplaces", cityId);
     }
 }
