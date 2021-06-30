@@ -1,11 +1,9 @@
 package com.example.cityexplorer.controller;
 
-import com.example.cityexplorer.model.Attraction;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Event;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.EventService;
-import com.example.cityexplorer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
