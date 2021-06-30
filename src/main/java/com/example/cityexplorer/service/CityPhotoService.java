@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CityPhotoService {
     List<CityPhoto> getList(City city);
+    void save(CityPhoto photo);
+    void delete(CityPhoto photo);
 }
