@@ -7,12 +7,12 @@
 <body>
 <div layout:fragment="content_part">
 
-    <form class="form-horizontal" th:object="${foodPlace}"
+    <form class="form-horizontal" th:object="${attraction}"
           th:action="${isNew ?
-            '/cities/' + city.id + '/foodplaces' :
-            '/cities/' + city.id + '/foodplaces/' + foodPlace.id}"
+            '/cities/' + city.id + '/attractions' :
+            '/cities/' + city.id + '/attractions/' + attraction.id}"
           th:method="${isNew ? 'post' : 'put'}"
-          name="foodplace_edit" id="foodplace_edit" method="post" role="form">
+          name="attraction_edit" id="attraction_edit" method="post" role="form">
         <div class="form-group">
             <input type="hidden" id="id" th:name="id" th:field="*{id}"/>
         </div>
@@ -34,6 +34,7 @@
         <br>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
+
 </div>
 </body>
 </html>

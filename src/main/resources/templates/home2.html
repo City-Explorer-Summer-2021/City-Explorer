@@ -315,9 +315,7 @@
                 <div th:object="${attractions}">
                     <h4 align="center">Достопримечательности:</h4>
                     <br>
-
                     <div class="align-middle">
-
                         <div class="align-middle">
                             <span th:if="${attractions.size() == 0 && user == null}">
                                 <p th:text="'Информации о Достопримечательностях пока что нет'">Информации о Достопримечательностях пока что нет</p>
@@ -326,8 +324,6 @@
                                    th:text="'Достопримечательности города ' + ${city.name} + ': ' + ${attractions.size()}">Достопримечательности</a>
                             </h5>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -345,7 +341,9 @@
                             Мероприятия</a></h5>
                     </div>
                 </div>
+
                 <br><br>
+
                 <div th:object="${foodPlaces}">
                     <h4 align="center">Места питания:</h4>
                     <br>

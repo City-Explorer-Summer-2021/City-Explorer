@@ -28,7 +28,8 @@
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Адрес</th>
-                </tr>
+                    <th colspan="2" th:if="${isAdmin}"></th>
+              </tr>
               </thead>
               <th:block th:each="attraction : ${attractions}">
                 <tr>
@@ -38,12 +39,28 @@
                     </td>
                     <td th:text="${attraction.description}">Описание</td>
                     <td th:text="${attraction.address}">Адрес</td>
+                    <td th:if="${isAdmin}" style="text-align: center">
+                        <a th:href="@{'/cities/{city_id}/attractions/{attraction_id}/edit'(city_id=${city.id}, attraction_id=${attraction.id})}"
+                           class="btn btn-outline-primary">
+                           <i class="fa fa-edit" style="font-size: 20px;"></i>
+                        </a>
+                    </td>
+                    <td th:if="${isAdmin}" style="text-align: center">
+                        <a th:href="@{'/cities/{city_id}/attractions/{attraction_id}/delete'(city_id=${city.id}, attraction_id=${attraction.id})}"
+                           class="btn btn-outline-danger">
+                           <i class="fa fa-trash" style="font-size: 20px;"></i>
+                        </a>
+                    </td>
                 </tr>
             </th:block>
           </table>
             </span>
         </tr>
     </div>
+
+    <a th:if="${isAdmin}"
+       th:href="@{'/cities/{city_id}/attractions/add'(city_id=${city.id})}"
+       class="btn btn-outline-primary">Добавить</a>
 
 </div>
 </body>

@@ -2,7 +2,6 @@ package com.example.cityexplorer.controller;
 
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.FoodPlace;
-import com.example.cityexplorer.model.Hotel;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.FoodPlaceService;
 import com.example.cityexplorer.service.UserService;
@@ -92,8 +91,7 @@ public class FoodPlaceController {
     }
 
     @PostMapping("/cities/{cityId}/foodplaces")
-    public String saveNewHotel(@AuthenticationPrincipal User user,
-                               @PathVariable("cityId") Long cityId,
+    public String saveNewHotel(@PathVariable("cityId") Long cityId,
                                FoodPlace foodPlace) {
         foodPlaceService.save(foodPlace);
         return String.format("redirect:/cities/%d/foodplaces", cityId);
