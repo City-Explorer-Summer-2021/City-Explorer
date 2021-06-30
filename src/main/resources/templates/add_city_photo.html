@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+                <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Добавить фото города</h3></div>
+                        <br>
+
+    <div th:if="${message}">
+        <h3 th:text="${message}"/>
+    </div>
+
+    <div>
+        <form method="POST" enctype="multipart/form-data" th:action="@{'/cities/{id}/photo/add'(id=${city.id})}">
+            <table>
+                <tr><td>Выберите фото:<br></td></tr>
+                <tr> <td><input class="btn btn-lg btn-primary" type="file" name="file" /></td></tr>
+                <br>
+                <tr><td><input class="btn btn-lg btn-primary" type="submit"  value="Загрузить" /></td></tr>
+                <tr><td></td></tr>
+            </table>
+        </form>
+    </div>
+
+<!--    <div>-->
+<!--        <ul>-->
+<!--            <li th:each="file : ${files}">-->
+<!--                <a th:href="${file}" th:text="${file}" />-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+</div>
+</body>
+</html>

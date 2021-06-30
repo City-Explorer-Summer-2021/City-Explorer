@@ -238,6 +238,10 @@
                 <div th:object="${cityPhotos}">
                     <h4 align="center">Фотографии:</h4>
                     <br>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{'/cities/{id}/photo/add'(id=${city.id})}">Добавить фото города</a>
+                    </div>
+                    <br>
                     <div class="align-middle">
           <span th:if="${cityPhotos.size() == 0}">
             <td th:text="'Фотографий города пока что нет'">Фотографий города пока что нет</td>
