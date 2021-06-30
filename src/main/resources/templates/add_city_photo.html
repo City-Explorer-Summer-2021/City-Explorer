@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+    <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Фото города</h3></div>
+    <br>
+    <a th:href="@{'/?id={id}'(id=${city.id})}">Вернуться на страницу города</a>
+    <br>
+    <div style="text-align: center;">
+        <div th:if="${message}">
+            <h4 th:text="${message}"/>
+        </div>
+    </div>
+
+    <div th:if="${isDeleting }" style="alignment: center; margin-top: 15px;">
+        <form th:action="@{'/cities/{city_id}/photos/{photo_id}'(city_id=${city.id}, photo_id=${cityPhoto.id})}"
+              th:method="delete" method="post">
+            <span th:text="${'Удалить ' + cityPhoto.name + '?'}" class="h4" >
+                Удалить фотографию?
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <a th:href="@{'/cities/{city_id}/photo/add'(city_id=${city.id})}" class="btn btn-outline-primary">
+                Отмена
+            </a>
+            &nbsp;&nbsp;
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 20px;"></i> Удалить
+            </button>
+        </form>
+        <br><hr><br>
+    </div>
+
+
+
+    <div>
+        <form method="POST" enctype="multipart/form-data" th:action="@{'/cities/{id}/photo/add'(id=${city.id})}">
+            <table>
+                <tr><td>Выберите фото:<br></td></tr>
+                <tr> <td><input class="btn btn-lg btn-primary" type="file" name="file" /></td></tr>
+                <br>
+                <tr><td><input class="btn btn-lg btn-primary" type="submit"  value="Загрузить" /></td></tr>
+                <tr><td></td></tr>
+            </table>
+        </form>
+    </div>
+    <br><br><br>
+    <div th:object="${cityPhotos}">
+        <div sec:authorize="hasAuthority('ADMIN')">
+
+        <h4 align="center">Все фотографии города:</h4>
+        <table table class="table table-secondary table-striped table-hover table-bordered">
+                <tr>
+                    <th>Превью</th>
+                    <th>Имя файла</th>
+                    <th>Удалить</th>
+                </tr>
+                <tr th:each="photo : ${cityPhotos}">
+                    <th><img th:src="@{'/img/{id}/{name}' (id=${photo.city.id}, name=${photo.name}) }" style="width:75px;height:75px"></th>
+                    <th th:text="${photo.name}"></th>
+                    <th>
+                        <a th:href="@{'/cities/{city_id}/photos/{photo_id}/delete'(city_id=${city.id}, photo_id=${photo.id})}"
+                           class="btn btn-outline-danger">
+                            <i class="fa fa-trash" style="font-size: 20px;"></i>
+                        </a>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

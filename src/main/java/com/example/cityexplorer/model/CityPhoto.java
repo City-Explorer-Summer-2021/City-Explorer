@@ -25,6 +25,11 @@ public class CityPhoto {
 
     private String name;
 
+    public CityPhoto(String name, City city) {
+        this.name = name;
+        this.city = city;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
