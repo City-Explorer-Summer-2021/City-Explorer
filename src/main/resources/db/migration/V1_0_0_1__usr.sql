@@ -15,9 +15,11 @@ ALTER TABLE user_role
     ADD CONSTRAINT user_role_fk
     FOREIGN KEY (user_id) REFERENCES usr;
 
-INSERT INTO usr (id, username, password, active)
-VALUES (1, 'admin', '1', true)
-RETURNING id;
-
+WITH row AS (
+INSERT INTO usr (username, password, active)
+VALUES ('admin', '1', true)
+    RETURNING id)
 INSERT INTO user_role (user_id, roles)
-VALUES (1, 'USER'), (1, 'ADMIN');
+SELECT id, 'USER' FROM row
+UNION ALL
+SELECT id, 'ADMIN' FROM row;

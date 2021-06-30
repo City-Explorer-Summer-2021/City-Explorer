@@ -1,3 +1,3 @@
 UPDATE usr
 SET password = '$2a$08$9fpPBFoZmeUVyHP0SI52y.KZ491V9KSXyiQ2MWb2tjHMPxI5qC.hS'
-WHERE id = 1;
+WHERE id = (SELECT id FROM usr LIMIT 1);
