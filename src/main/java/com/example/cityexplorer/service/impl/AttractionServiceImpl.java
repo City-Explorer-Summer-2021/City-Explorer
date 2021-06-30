@@ -64,10 +64,10 @@ public class AttractionServiceImpl implements AttractionService {
         Assert.notNull(id, ErrorMessages.NULL_ATTRACTION_ID.getErrorMessage());
         Assert.notNull(attraction, ErrorMessages.NULL_ATTRACTION_OBJECT.getErrorMessage());
 
-        getById(id);
+        Attraction fetched = getById(id);
 
         log.info("Updating the Attracton with id: {}", id);
-        attraction.setId(id);
+        attraction.setPhotos(fetched.getPhotos());
 
         return attractionRepository.save(attraction);
     }

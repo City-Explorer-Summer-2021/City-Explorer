@@ -99,8 +99,7 @@ public class HotelController {
     }
 
     @PostMapping("/cities/{cityId}/hotels")
-    public String saveNewHotel(@AuthenticationPrincipal User user,
-                               @PathVariable("cityId") Long cityId,
+    public String saveNewHotel(@PathVariable("cityId") Long cityId,
                                Hotel hotel) {
         hotelService.save(hotel);
         return String.format("redirect:/cities/%d/hotels", cityId);

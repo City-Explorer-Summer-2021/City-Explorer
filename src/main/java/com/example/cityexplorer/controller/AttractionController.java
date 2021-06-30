@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class AttractionController {
         List<Attraction> attractions = attractionService.getList(city);
         model.addAttribute("attractions", attractions);
         model.addAttribute("city", city);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "attractions";
     }
 
@@ -45,7 +49,66 @@ public class AttractionController {
             Model model) {
         model.addAttribute("attraction", attraction);
         model.addAttribute("city", city);
+        model.addAttribute("isDeleting", false);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "attraction";
     }
 
+    @GetMapping("/cities/{cityId}/attractions/{attractionId}/edit")
+    public String getHotelEditPage(
+            @PathVariable("cityId") City city,
+            @PathVariable("attractionId") Attraction attraction,
+            Model model) {
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("city", city);
+        model.addAttribute("isNew", false);
+        return "attraction_edit";
+    }
+
+    @GetMapping("/cities/{cityId}/attractions/add")
+    public String getHotelAddPage(
+            @PathVariable("cityId") City city,
+            Model model) {
+        Attraction attraction = new Attraction();
+        attraction.setCity(city);
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("city", city);
+        model.addAttribute("isNew", true);
+        return "attraction_edit";
+    }
+
+    @GetMapping("/cities/{cityId}/attractions/{attractionId}/delete")
+    public String getHotelDeletePage(
+            @PathVariable("cityId") City city,
+            @PathVariable("attractionId") Attraction attraction,
+            @AuthenticationPrincipal User user,
+            Model model) {
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("city", city);
+        model.addAttribute("isDeleting", true);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
+        return "attraction";
+    }
+
+    @PostMapping("/cities/{cityId}/attractions")
+    public String saveNewHotel(@PathVariable("cityId") Long cityId,
+                               Attraction attraction) {
+        attractionService.save(attraction);
+        return String.format("redirect:/cities/%d/attractions", cityId);
+    }
+
+    @PutMapping(value = "/cities/{cityId}/attractions/{attractionId}")
+    public String updateHotel(@PathVariable("cityId") Long cityId,
+                              @PathVariable("attractionId") Long attractionId,
+                              Attraction attraction) {
+        attractionService.update(attractionId, attraction);
+        return String.format("redirect:/cities/%d/attractions", cityId);
+    }
+
+    @DeleteMapping("/cities/{cityId}/attractions/{attractionId}")
+    public String deleteHotel(@PathVariable("cityId") Long cityId,
+                              @PathVariable("attractionId") Long attractionId) {
+        attractionService.delete(attractionId);
+        return String.format("redirect:/cities/%d/attractions", cityId);
+    }
 }
