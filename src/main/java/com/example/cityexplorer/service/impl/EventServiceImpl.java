@@ -64,10 +64,10 @@ public class EventServiceImpl implements EventService {
         Assert.notNull(id, ErrorMessages.NULL_EVENT_ID.getErrorMessage());
         Assert.notNull(event, ErrorMessages.NULL_EVENT_OBJECT.getErrorMessage());
 
-        getById(id);
+        Event fetched = getById(id);
 
         log.info("Updating the Event with id: {}", id);
-        event.setId(id);
+        event.setPhotos(fetched.getPhotos());
 
         return eventRepository.save(event);
     }

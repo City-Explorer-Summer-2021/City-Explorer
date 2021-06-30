@@ -21,12 +21,10 @@ import java.util.List;
 public class FoodPlaceController {
 
     private final FoodPlaceService foodPlaceService;
-    private final UserService userService;
 
     @Autowired
-    public FoodPlaceController(FoodPlaceService foodPlaceService, UserService userService) {
+    public FoodPlaceController(FoodPlaceService foodPlaceService) {
         this.foodPlaceService = foodPlaceService;
-        this.userService = userService;
     }
 
     @GetMapping("/cities/{cityId}/foodplaces")
@@ -55,7 +53,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/edit")
-    public String getHotelEditPage(
+    public String getFoodPlaceEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("foodPlaceId") FoodPlace foodPlace,
             Model model) {
@@ -66,7 +64,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/add")
-    public String getHotelAddPage(
+    public String getFoodPlaceAddPage(
             @PathVariable("cityId") City city,
             Model model) {
         FoodPlace foodPlace = new FoodPlace();
@@ -78,7 +76,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/delete")
-    public String getHotelDeletePage(
+    public String getFoodPlaceDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("foodPlaceId") FoodPlace foodPlace,
             @AuthenticationPrincipal User user,
@@ -91,23 +89,23 @@ public class FoodPlaceController {
     }
 
     @PostMapping("/cities/{cityId}/foodplaces")
-    public String saveNewHotel(@PathVariable("cityId") Long cityId,
-                               FoodPlace foodPlace) {
+    public String saveNewFoodPlace(@PathVariable("cityId") Long cityId,
+                                   FoodPlace foodPlace) {
         foodPlaceService.save(foodPlace);
         return String.format("redirect:/cities/%d/foodplaces", cityId);
     }
 
     @PutMapping(value = "/cities/{cityId}/foodplaces/{foodPlaceId}")
-    public String updateHotel(@PathVariable("cityId") Long cityId,
-                              @PathVariable("foodPlaceId") Long foodPlaceId,
-                              FoodPlace foodPlace) {
+    public String updateFoodPlace(@PathVariable("cityId") Long cityId,
+                                  @PathVariable("foodPlaceId") Long foodPlaceId,
+                                  FoodPlace foodPlace) {
         foodPlaceService.update(foodPlaceId, foodPlace);
         return String.format("redirect:/cities/%d/foodplaces", cityId);
     }
 
     @DeleteMapping("/cities/{cityId}/foodplaces/{foodPlaceId}")
-    public String deleteHotel(@PathVariable("cityId") Long cityId,
-                              @PathVariable("foodPlaceId") Long foodPlaceId) {
+    public String deleteFoodPlace(@PathVariable("cityId") Long cityId,
+                                  @PathVariable("foodPlaceId") Long foodPlaceId) {
         foodPlaceService.delete(foodPlaceId);
         return String.format("redirect:/cities/%d/foodplaces", cityId);
     }

@@ -7,10 +7,10 @@
 <body>
 <div layout:fragment="content_part">
 
-    <form class="form-horizontal" th:object="${attraction}"
+    <form class="form-horizontal" th:object="${event}"
           th:action="${isNew ?
-            '/cities/' + city.id + '/attractions' :
-            '/cities/' + city.id + '/attractions/' + attraction.id}"
+            '/cities/' + city.id + '/events' :
+            '/cities/' + city.id + '/events/' + event.id}"
           th:method="${isNew ? 'post' : 'put'}"
           name="attraction_edit" id="attraction_edit" method="post" role="form">
         <div class="form-group">
@@ -24,15 +24,27 @@
             <input type="text" class="form-control" id="name" th:name="name" th:field="*{name}" maxlength="255"/>
         </div>
         <div class="form-group">
-            <label for="description">Описание: </label>
-                <textarea class="form-control" rows="10" name="description" id="description"
-                          th:field="*{description}"></textarea>
+        <label for="description">Описание: </label>
+            <textarea class="form-control" rows="10" name="description" id="description"
+                      th:field="*{description}"></textarea>
         </div>
         <div class="form-group">
             <label for="name">Адрес: </label>
             <input type="text" class="form-control" id="address" th:name="address" th:field="*{address}"
                    maxlength="255"/>
         </div>
+        <div class="form-group">
+            <label for="startDate">Дата начала: </label>
+<!--            <input type="datetime" class="form-control" id="startDate" th:name="startDate" th:field="*{startDate}"-->
+            <input type="datetime" class="form-control" id="startDate" th:name="startDate" th:field="*{startDate}"
+                   maxlength="255"/>
+        </div>
+        <div class="form-group">
+            <label for="finishDate">Дата окончания: </label>
+            <input type="datetime" class="form-control" id="finishDate" th:name="finishDate" th:field="*{finishDate}"
+                   maxlength="255"/>
+        </div>
+
         <br>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
