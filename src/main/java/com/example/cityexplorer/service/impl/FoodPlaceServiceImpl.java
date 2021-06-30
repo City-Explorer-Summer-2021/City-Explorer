@@ -62,10 +62,10 @@ public class FoodPlaceServiceImpl implements FoodPlaceService {
         Assert.notNull(id, ErrorMessages.NULL_FOOD_PLACE_ID.getErrorMessage());
         Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
 
-        getById(id);
+        FoodPlace fetched = getById(id);
 
         log.info("Updating the Food place with id: {}", id);
-        foodPlace.setId(id);
+        foodPlace.setFoodPlaceValuations(fetched.getFoodPlaceValuations());
 
         return foodPlaceRepository.save(foodPlace);
     }

@@ -103,7 +103,7 @@ public class HotelController {
                                @PathVariable("cityId") Long cityId,
                                Hotel hotel) {
         hotelService.save(hotel);
-        return String.format("redirect:/cities/%d/hotels", hotel.getCity().getId());
+        return String.format("redirect:/cities/%d/hotels", cityId);
     }
 
     @PutMapping(value = "/cities/{cityId}/hotels/{hotelId}")
