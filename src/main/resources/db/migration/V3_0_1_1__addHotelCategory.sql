@@ -1,6 +1,6 @@
-INSERT INTO hotel_category (id, name)
+INSERT INTO hotel_category (name)
 VALUES
-(1, 'Отель / Гостиница'),
-(2, 'Квартира')
-RETURNING id;
+    ('Отель / Гостиница'),
+    ('Мотель'),
+    ('Квартира');
 

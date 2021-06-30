@@ -4,8 +4,7 @@ ALTER TABLE usr
     ADD COLUMN lastname varchar(255);
 
 UPDATE usr
-SET phone= '89991234567', firstname='ADMIN', lastname='ADMIN'
-WHERE id = 1;
+SET phone= '89990000000', firstname='System', lastname='Record';
 
 ALTER TABLE usr
     ALTER COLUMN phone SET NOT NULL,
