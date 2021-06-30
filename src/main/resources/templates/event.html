@@ -7,6 +7,24 @@
 <body>
 <div layout:fragment="content_part">
 
+    <div th:if="${isDeleting && isAdmin}" style="alignment: center; margin-top: 15px;">
+        <form th:action="@{'/cities/{city_id}/events/{event_id}'(city_id=${city.id}, event_id=${event.id})}"
+              th:method="delete" method="post">
+            <span th:text="${'Удалить ' + event.name + '?'}" class="h4" >
+                Удалить место питания?
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <a th:href="@{'/cities/{city_id}/events'(city_id=${city.id})}" class="btn btn-outline-primary">
+                Отмена
+            </a>
+            &nbsp;&nbsp;
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 20px;"></i> Удалить
+            </button>
+        </form>
+        <br><hr><br>
+    </div>
+
     <div th:object = "${event}">
         <div style="text-align: center;">
             <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Мероприятия</h5>
