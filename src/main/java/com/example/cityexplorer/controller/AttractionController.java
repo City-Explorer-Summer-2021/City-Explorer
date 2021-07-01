@@ -55,7 +55,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/{attractionId}/edit")
-    public String getHotelEditPage(
+    public String getAttractionEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("attractionId") Attraction attraction,
             Model model) {
@@ -66,7 +66,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/add")
-    public String getHotelAddPage(
+    public String getAttractionAddPage(
             @PathVariable("cityId") City city,
             Model model) {
         Attraction attraction = new Attraction();
@@ -78,7 +78,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/{attractionId}/delete")
-    public String getHotelDeletePage(
+    public String getAttractionDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("attractionId") Attraction attraction,
             @AuthenticationPrincipal User user,
@@ -91,14 +91,14 @@ public class AttractionController {
     }
 
     @PostMapping("/cities/{cityId}/attractions")
-    public String saveNewHotel(@PathVariable("cityId") Long cityId,
+    public String saveNewAttraction(@PathVariable("cityId") Long cityId,
                                Attraction attraction) {
         attractionService.save(attraction);
         return String.format("redirect:/cities/%d/attractions", cityId);
     }
 
     @PutMapping(value = "/cities/{cityId}/attractions/{attractionId}")
-    public String updateHotel(@PathVariable("cityId") Long cityId,
+    public String updateAttraction(@PathVariable("cityId") Long cityId,
                               @PathVariable("attractionId") Long attractionId,
                               Attraction attraction) {
         attractionService.update(attractionId, attraction);
@@ -106,7 +106,7 @@ public class AttractionController {
     }
 
     @DeleteMapping("/cities/{cityId}/attractions/{attractionId}")
-    public String deleteHotel(@PathVariable("cityId") Long cityId,
+    public String deleteAttraction(@PathVariable("cityId") Long cityId,
                               @PathVariable("attractionId") Long attractionId) {
         attractionService.delete(attractionId);
         return String.format("redirect:/cities/%d/attractions", cityId);

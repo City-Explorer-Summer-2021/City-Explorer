@@ -164,14 +164,17 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/ticket_machine">Мой профиль</a></li>
+                                <div sec:authorize="hasAuthority('ADMIN')">
+                                <li><a class="dropdown-item" href="/cities/list">Список городов</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">My Account info</a></li>
+                                <li><a class="dropdown-item" href="/cities/add">Добавить город</a></li>
                                 <!--                        <li><hr class="dropdown-divider"></li>-->
                                 <!--                        <li><a class="dropdown-item" href="#">My Account info</a></li>-->
+                                </div>
                             </ul>
+
                         </li>
                     </ul>
                 </div>

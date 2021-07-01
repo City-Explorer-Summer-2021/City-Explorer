@@ -85,7 +85,7 @@ public class CityPhotoController {
     }
 
     @GetMapping("/cities/{cityId}/photos/{photoId}/delete")
-    public String getHotelDeletePage(
+    public String getPhotoDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("photoId") CityPhoto cityPhoto,
             @AuthenticationPrincipal User user,
@@ -98,7 +98,7 @@ public class CityPhotoController {
     }
 
     @DeleteMapping("/cities/{cityId}/photos/{photoId}")
-    public String deleteHotel(@PathVariable("cityId") Long cityId,
+    public String deletePhoto(@PathVariable("cityId") Long cityId,
                               @PathVariable("photoId") CityPhoto cityPhoto) {
         cityPhotoService.delete(cityPhoto);
 
