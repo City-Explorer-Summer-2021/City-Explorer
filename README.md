@@ -30,5 +30,9 @@
 ***admin*** c паролем ***1***
 
 ### Полезные ссылки
+* [Получить координаты по адресу](https://snipp.ru/tools/address-coord)
 * [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
 * [Spring Boot FlyWay: миграции БД, профиль пользователя](https://www.youtube.com/watch?v=ArM7nCys4hY&list=PLU2ftbIeotGpAYRP9Iv2KLIwK36-o_qYk&index=12)
+* [Tutorial: Thymeleaf + Spring](https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html)
+* [Введение в Thymeleaf](https://sysout.ru/vvedenie-v-thymeleaf/)
+* [Assert a good practice or not?](https://stackoverflow.com/questions/2440984/assert-a-good-practice-or-not)
