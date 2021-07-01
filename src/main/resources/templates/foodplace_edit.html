@@ -36,6 +36,11 @@
         <br>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
+    <br>
+    <br>
+    <a th:href="@{'/cities/{city_id}/foodplaces/'(city_id=${city.id})}">Вернуться к списку мест питания</a>
+    <br>
+
 </div>
 </body>
 </html>

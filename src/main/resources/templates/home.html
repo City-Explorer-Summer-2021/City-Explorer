@@ -66,7 +66,6 @@
                     </li>
                     <div sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
-                            <!--                            <a class="nav-link active" aria-current="page" href="/auth/registration">Регистрация</a>-->
                             <a class="nav-link active" aria-current="page" href="/registration">Регистрация</a>
                         </li>
                     </div>
@@ -87,15 +86,10 @@
 
                     <li class="nav-item">
                         <div th:object="${cityDto}">
-                            <!--                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">-->
-                            <!--                                Launch static backdrop modal-->
-                            <!--                            </button>-->
                             <a class="nav-link active" aria-current="page" href="/" th:text="*{name}"
                                data-toggle="modal" data-target="#staticBackdrop">ГОРОД</a>
                         </div>
                     </li>
-
-                    <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
                          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -107,29 +101,13 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <!--                                    <table>-->
-                                    <!--                                        <tr th:each="city : ${allCities}">-->
-                                    <!--                                            <td th:text="${city.name}">Город</td>-->
-                                    <!--                                        </tr>-->
-                                    <!--                                    </table>-->
-                                    <!--                                    <table>-->
-                                    <!--                                        <tr th:each="mapItem : ${allCities}">-->
-                                    <!--&lt;!&ndash;                                            <td th:text="${mapItem.value}"></td>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;                                            <td th:text="${mapItem.key.name}"></td>&ndash;&gt;-->
-                                    <!--                                        </tr>-->
-                                    <!--                                    </table>-->
                                     <table>
                                         <th:block th:each="pair : ${allCities}">
                                             <tr>
                                                 <td th:text="${pair.value}"
                                                     style="color: red; font-size: 20px; font-weight: 700"></td>
                                             </tr>
-                                            <!--                                            <tr>-->
-                                            <!--                                                <td th:text="${#maps.}" style="color: red; font-size: 20px"></td>-->
-                                            <!--                                            </tr>-->
                                             <tr>
-                                                <!--                                                <a th:href="@{/ticket_machine/ticket_info/{id}(id=${ticket.id})}" th:text="${ticket.id}"/>-->
-                                                <!--                                                <td th:text="${pair.key.name}"></td>-->
                                                 <td><a th:href="@{/?id={id}(id=${pair.key.id})}"
                                                        th:text="${pair.key.name}"/></td>
                                             </tr>
@@ -140,43 +118,45 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
                                     </button>
-                                    <!--                                    <button type="button" class="btn btn-primary">Understood</button>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--                    <div sec:authorize="hasRole('ROLE_USER')">-->
-                    <!--                                        <li class="nav-item">-->
-                    <!--                                            <a class="nav-link active" aria-current="page" href="/ticket_machine/new_ticket">Create a Ticket</a>-->
-                    <!--                                        </li>-->
-                    <!--                    </div>-->
                 </ul>
                 <div sec:authorize="isAuthenticated()">
+                    <div sec:authorize="hasAuthority('ADMIN')">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
                         <li class="navbar-text">
                             Добро пожаловать,
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle active" href="#" id="" role="button"
                                data-toggle="dropdown" aria-expanded="false">
                                 <span sec:authentication="name">Пользователь</span>
                             </a>
-
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div sec:authorize="hasAuthority('ADMIN')">
-                                <li><a class="dropdown-item" href="/cities/list">Список городов</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/cities/add">Добавить город</a></li>
-                                <!--                        <li><hr class="dropdown-divider"></li>-->
-                                <!--                        <li><a class="dropdown-item" href="#">My Account info</a></li>-->
-                                </div>
+                                    <li><a class="dropdown-item" href="/cities/list">Список городов</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/cities/add">Добавить город</a></li>
                             </ul>
-
                         </li>
                     </ul>
+                </div>
+                    <div sec:authorize="!hasAuthority('ADMIN')">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                            <li class="navbar-text">
+                                Добро пожаловать,
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"  role="button"
+                                   data-toggle="dropdown" aria-expanded="false">
+                                    <span sec:authentication="name">Пользователь</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div sec:authorize="isAuthenticated()">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px">

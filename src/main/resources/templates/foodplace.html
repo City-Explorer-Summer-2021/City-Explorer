@@ -26,17 +26,25 @@
     </div>
 
     <div style="alignment: left; margin-top: 15px; color: darkred">
-        <span th:text="${'Средняя оценка: ' + valuationAvg}">Средняя оценка: неизвестна</span><br>
-        <span th:text="${'Количество оценок: ' + valuationCount}">Количество оценок: неизвестна</span>
+        <span th:text="${'Средняя оценка: ' + valuationAvg}"  style="font-weight:700">Средняя оценка: неизвестна</span><br>
+        <span th:text="${'Количество оценок: ' + valuationCount}"  style="font-weight:700">Количество оценок: неизвестна</span>
     </div>
+    <br>
+    <div sec:authorize="!isAuthenticated()">
+    Для того, чтоб поставить оценку, нужно быть зарегистрированным пользователем. <a href="/login">Вход </a>
+    </div>
+    <br>
 
     <div th:object = "${foodPlace}">
         <div style="text-align: center;">
-            <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Места Питания</h5>
-            <p><span th:text="*{description}">Описание</span></p>
-            <p><span th:text="'Адрес: ' + *{address}">Адрес</span></p>
+            <h4 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Места Питания</h4>
+            <br>
+            <p align="left"><span th:text="*{description}" >Описание</span></p>
+            <br>
+            <p align="left" style="font-weight: 700">Адрес: </p><p align="left"><span th:text="*{address}">Адрес</span></p>
         </div>
     </div>
+
 
     <br>
     <div th:if="${user != null && !isAdmin}">
@@ -64,6 +72,10 @@
             <button type="submit" class="btn btn-primary">Отправить</button>
         </form>
     </div>
+    <br>
+    <br>
+    <a th:href="@{'/cities/{city_id}/foodplaces/'(city_id=${city.id})}">Вернуться к списку мест питания</a>
+    <br>
 
 </div>
 </body>

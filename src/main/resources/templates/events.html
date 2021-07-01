@@ -16,7 +16,8 @@
     <br><br>
 
     <div th:object = "${events}">
-        <h4>Массовые мероприятия:</h4>
+        <h4 align="center">Массовые мероприятия:</h4>
+        <br>
         <tr class="align-middle">
           <span th:if="${events.size() == 0}">
             <td th:text="'Информации о Массовых мероприятиях пока что нет'">Информации о Массовых мероприятиях пока что нет</td>
@@ -65,6 +66,11 @@
     <a th:if="${isAdmin}"
        th:href="@{'/cities/{city_id}/events/add'(city_id=${city.id})}"
        class="btn btn-outline-primary">Добавить</a>
+    <br>
+    <br>
+    <a th:href="@{'/?id={id}'(id=${city.id})}">Вернуться на страницу города</a>
+    <br>
+
 
 </div>
 </body>
