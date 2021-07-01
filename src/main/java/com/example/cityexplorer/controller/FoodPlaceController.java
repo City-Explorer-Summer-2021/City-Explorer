@@ -60,7 +60,8 @@ public class FoodPlaceController {
         model.addAttribute("valuation", valuation);
         model.addAttribute("isNewValuation", valuation.getValue() < 1);
 
-        model.addAttribute("valuationAvg", valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId()));
+        model.addAttribute("valuationAvg",
+                String.format("%.1f", valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId())));
         model.addAttribute("valuationCount", valuationService.getCountByFoodPlace(foodPlace));
 
         return "foodplace";
