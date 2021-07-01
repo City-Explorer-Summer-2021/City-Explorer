@@ -56,16 +56,10 @@
                 <input type="hidden" id="foodp_place" th:name="foodp_place" th:field="*{foodPlace.id}"/>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <label class="custom-control-label" for="valuation1" th:text="1">1</label>
-                <input type="radio" name="valuation" id="valuation1" value="1" th:field="*{value}">
-                <label class="custom-control-label" for="valuation2" th:text="2">2</label>
-                <input type="radio" name="valuation" id="valuation2" value="2" th:field="*{value}">
-                <label class="custom-control-label" for="valuation3" th:text="3">3</label>
-                <input type="radio" name="valuation" id="valuation3" value="3" th:field="*{value}">
-                <label class="custom-control-label" for="valuation4" th:text="4">4</label>
-                <input type="radio" name="valuation" id="valuation4" value="4" th:field="*{value}">
-                <label class="custom-control-label" for="valuation5" th:text="5">5</label>
-                <input type="radio" name="valuation" id="valuation5" value="5" th:field="*{value}">
+                <span th:each="i : ${#numbers.sequence(1, 5, 1)}">
+                   <label class="custom-control-label" th:for="${'valuation' + i}" th:text="${i}">1</label>
+                   <input type="radio" name="valuation" th:id="${'valuation' + i}" th:value="${i}" th:field="*{value}">
+                </span>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Отправить</button>
