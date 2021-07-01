@@ -4,6 +4,7 @@ import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.exception.NotFoundException;
 import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.FoodPlaceValuation;
+import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.repository.FoodPlaceValuationRepository;
 import com.example.cityexplorer.service.FoodPlaceValuationService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,24 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
         log.info("Requested the Food place valuation with id: {}", id);
         return valuationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessages.NOT_FOUND.getErrorMessage()));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @NotNull
+    public FoodPlaceValuation getByByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
+        Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
+        Assert.notNull(user, ErrorMessages.NULL_USER_OBJECT.getErrorMessage());
+
+        log.info("Requested the Food place valuation for food place id: {} and user id{}",
+                foodPlace.getId(), user.getId());
+
+        return valuationRepository.findByFoodPlaceAndUser(foodPlace, user)
+                .orElse(FoodPlaceValuation.builder()
+                        .foodPlace(foodPlace)
+                        .user(user)
+                        .value(0)
+                        .build());
     }
 
     @Override

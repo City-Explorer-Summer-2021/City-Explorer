@@ -2,9 +2,10 @@ package com.example.cityexplorer.controller;
 
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.FoodPlace;
+import com.example.cityexplorer.model.FoodPlaceValuation;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.FoodPlaceService;
-import com.example.cityexplorer.service.UserService;
+import com.example.cityexplorer.service.FoodPlaceValuationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,14 @@ import java.util.List;
 public class FoodPlaceController {
 
     private final FoodPlaceService foodPlaceService;
+    private final FoodPlaceValuationService foodPlaceValuationService;
 
     @Autowired
-    public FoodPlaceController(FoodPlaceService foodPlaceService) {
+    public FoodPlaceController(
+            FoodPlaceService foodPlaceService,
+            FoodPlaceValuationService foodPlaceValuationService) {
         this.foodPlaceService = foodPlaceService;
+        this.foodPlaceValuationService = foodPlaceValuationService;
     }
 
     @GetMapping("/cities/{cityId}/foodplaces")
@@ -48,7 +53,12 @@ public class FoodPlaceController {
         model.addAttribute("foodPlace", foodPlace);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", false);
+        model.addAttribute("user", user);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
+
+        FoodPlaceValuation valuation = foodPlaceValuationService.getByByFoodPlaceAndUser(foodPlace, user);
+        model.addAttribute("valuation", valuation);
+        model.addAttribute("isNewValuation", valuation.getValue() < 1);
         return "foodplace";
     }
 

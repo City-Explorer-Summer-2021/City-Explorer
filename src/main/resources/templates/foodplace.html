@@ -34,6 +34,39 @@
         <h5>Здесь должны быть фото</h5>
     </div>
 
+    <br>
+    <div th:if="${user != null && !isAdmin}">
+        <h5 th:text="${valuation.value > 0 ? 'Ваша оценка' : 'Вы еще не голосовали'}">Ваша оценка</h5>
+        <form th:object="${valuation}" class="form-horizontal"
+              th:action="@{'/cities/{city_id}/foodplaces/{foodplace_id}/valuations'(city_id=${city.id}, foodplace_id=${foodPlace.id})}"
+              th:method="${isNewValuation ? 'post' : 'put'}"
+              name="foodplace_valuation" id="foodplace_valuation" method="post" role="form">
+            <div class="form-group">
+                <input type="hidden" id="id" th:name="id" th:field="*{id}"/>
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="user" th:name="user" th:field="*{user.id}"/>
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="foodp_place" th:name="foodp_place" th:field="*{foodPlace.id}"/>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <label class="custom-control-label" for="valuation1" th:text="1">1</label>
+                <input type="radio" name="valuation" id="valuation1" value="1" th:field="*{value}">
+                <label class="custom-control-label" for="valuation2" th:text="2">2</label>
+                <input type="radio" name="valuation" id="valuation2" value="2" th:field="*{value}">
+                <label class="custom-control-label" for="valuation3" th:text="3">3</label>
+                <input type="radio" name="valuation" id="valuation3" value="3" th:field="*{value}">
+                <label class="custom-control-label" for="valuation4" th:text="4">4</label>
+                <input type="radio" name="valuation" id="valuation4" value="4" th:field="*{value}">
+                <label class="custom-control-label" for="valuation5" th:text="5">5</label>
+                <input type="radio" name="valuation" id="valuation5" value="5" th:field="*{value}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>
