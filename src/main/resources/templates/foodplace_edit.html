@@ -23,9 +23,11 @@
             <label for="name">Название: </label>
             <input type="text" class="form-control" id="name" th:name="name" th:field="*{name}" maxlength="255"/>
         </div>
-        <label for="description">Описание: </label>
-        <textarea class="form-control" rows="10" name="description" id="description"
-                  th:field="*{description}"></textarea>
+        <div class="form-group">
+            <label for="description">Описание: </label>
+            <textarea class="form-control" rows="10" name="description" id="description"
+                      th:field="*{description}"></textarea>
+        </div>
         <div class="form-group">
             <label for="name">Адрес: </label>
             <input type="text" class="form-control" id="address" th:name="address" th:field="*{address}"

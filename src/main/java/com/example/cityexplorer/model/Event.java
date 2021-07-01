@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,11 +43,11 @@ public class Event {
     @Size(max = 255, message = "Must be less then 255")
     private String address;
 
-    @NotBlank(message = "Start date cannot be empty")
+    @NotNull(message = "Start date cannot be empty")
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
-    @NotBlank(message = "Finish date cannot be empty")
+    @NotNull(message = "Finish date cannot be empty")
     @Column(name = "finish_date")
     private LocalDateTime finishDate;
 

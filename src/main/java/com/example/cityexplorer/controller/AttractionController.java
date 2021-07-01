@@ -21,12 +21,10 @@ import java.util.List;
 public class AttractionController {
 
     private final AttractionService attractionService;
-    private final UserService userService;
 
     @Autowired
-    public AttractionController(AttractionService attractionService, UserService userService) {
+    public AttractionController(AttractionService attractionService) {
         this.attractionService = attractionService;
-        this.userService = userService;
     }
 
     @GetMapping("/cities/{cityId}/attractions")
@@ -92,22 +90,22 @@ public class AttractionController {
 
     @PostMapping("/cities/{cityId}/attractions")
     public String saveNewAttraction(@PathVariable("cityId") Long cityId,
-                               Attraction attraction) {
+                                    Attraction attraction) {
         attractionService.save(attraction);
         return String.format("redirect:/cities/%d/attractions", cityId);
     }
 
     @PutMapping(value = "/cities/{cityId}/attractions/{attractionId}")
     public String updateAttraction(@PathVariable("cityId") Long cityId,
-                              @PathVariable("attractionId") Long attractionId,
-                              Attraction attraction) {
+                                   @PathVariable("attractionId") Long attractionId,
+                                   Attraction attraction) {
         attractionService.update(attractionId, attraction);
         return String.format("redirect:/cities/%d/attractions", cityId);
     }
 
     @DeleteMapping("/cities/{cityId}/attractions/{attractionId}")
     public String deleteAttraction(@PathVariable("cityId") Long cityId,
-                              @PathVariable("attractionId") Long attractionId) {
+                                   @PathVariable("attractionId") Long attractionId) {
         attractionService.delete(attractionId);
         return String.format("redirect:/cities/%d/attractions", cityId);
     }

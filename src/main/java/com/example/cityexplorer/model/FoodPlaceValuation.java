@@ -1,6 +1,7 @@
 package com.example.cityexplorer.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class FoodPlaceValuation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
