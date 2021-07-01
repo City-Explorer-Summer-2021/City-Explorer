@@ -51,9 +51,15 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
     @NotNull
     public FoodPlaceValuation getByByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
         Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
-        Assert.notNull(user, ErrorMessages.NULL_USER_OBJECT.getErrorMessage());
 
-        log.info("Requested the Food place valuation for food place id: {} and user id{}",
+        if (user == null) {
+            return FoodPlaceValuation.builder()
+                    .foodPlace(foodPlace)
+                    .value(0)
+                    .build();
+        }
+
+        log.info("Requested the Food place valuation for food place with id: {} and user with id{}",
                 foodPlace.getId(), user.getId());
 
         return valuationRepository.findByFoodPlaceAndUser(foodPlace, user)
@@ -62,6 +68,25 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
                         .user(user)
                         .value(0)
                         .build());
+    }
+
+    @Override
+    public long getCountByFoodPlace(FoodPlace foodPlace) {
+        Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
+
+        log.info("Requested count of Food place valuation for food place with id: {}",
+                foodPlace.getId());
+
+        return valuationRepository.countByFoodPlace(foodPlace).orElse(0L);
+    }
+
+    @Override
+    public double getAvgValuationByFoodPlaseId(Long id) {
+        Assert.notNull(id, ErrorMessages.NULL_FOOD_PLACE_VALUATION_ID.getErrorMessage());
+
+        log.info("Requested count of Food place valuation for food place with id: {}", id);
+
+        return valuationRepository.getAvgValuationByFoodPlaseId(id).orElse(0.);
     }
 
     @Override

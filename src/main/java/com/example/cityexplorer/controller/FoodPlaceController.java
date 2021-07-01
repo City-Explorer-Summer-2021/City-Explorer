@@ -22,14 +22,14 @@ import java.util.List;
 public class FoodPlaceController {
 
     private final FoodPlaceService foodPlaceService;
-    private final FoodPlaceValuationService foodPlaceValuationService;
+    private final FoodPlaceValuationService valuationService;
 
     @Autowired
     public FoodPlaceController(
             FoodPlaceService foodPlaceService,
-            FoodPlaceValuationService foodPlaceValuationService) {
+            FoodPlaceValuationService valuationService) {
         this.foodPlaceService = foodPlaceService;
-        this.foodPlaceValuationService = foodPlaceValuationService;
+        this.valuationService = valuationService;
     }
 
     @GetMapping("/cities/{cityId}/foodplaces")
@@ -56,9 +56,13 @@ public class FoodPlaceController {
         model.addAttribute("user", user);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
 
-        FoodPlaceValuation valuation = foodPlaceValuationService.getByByFoodPlaceAndUser(foodPlace, user);
+        FoodPlaceValuation valuation = valuationService.getByByFoodPlaceAndUser(foodPlace, user);
         model.addAttribute("valuation", valuation);
         model.addAttribute("isNewValuation", valuation.getValue() < 1);
+
+        model.addAttribute("valuationAvg", valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId()));
+        model.addAttribute("valuationCount", valuationService.getCountByFoodPlace(foodPlace));
+
         return "foodplace";
     }
 

@@ -25,6 +25,11 @@
         <br><hr><br>
     </div>
 
+    <div style="alignment: left; margin-top: 15px; color: darkred">
+        <span th:text="${'Средняя оценка: ' + valuationAvg}">Средняя оценка: неизвестна</span><br>
+        <span th:text="${'Количество оценок: ' + valuationCount}">Количество оценок: неизвестна</span>
+    </div>
+
     <div th:object = "${foodPlace}">
         <div style="text-align: center;">
             <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Места Питания</h5>

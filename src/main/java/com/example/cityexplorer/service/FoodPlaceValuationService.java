@@ -14,6 +14,10 @@ public interface FoodPlaceValuationService {
 
     FoodPlaceValuation getByByFoodPlaceAndUser(FoodPlace foodPlace, User user);
 
+    long getCountByFoodPlace(FoodPlace foodPlace);
+
+    double getAvgValuationByFoodPlaseId(Long foodPlaceId);
+
     FoodPlaceValuation save(FoodPlaceValuation valuation);
 
     FoodPlaceValuation update(Long id, FoodPlaceValuation valuation);
