@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+              <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Добавление/редактирование транспорта</h3></div>
+                      <br>
+
+  <form class="form-horizontal" th:object="${transportEdit}"
+        th:action="${ isNew ?
+            '/cities/' + city.id + '/transports' :
+            '/cities/' + city.id + '/transports/' + transportEdit.id}"
+        th:method="${isNew ? 'post' : 'put'}"
+        name="transport_edit" id="transport_edit" method="post" role="form">
+
+      <a th:href="@{'/cities/{id}/transports/list'(id=${city.id})}">Вернуться к списку транспорта без сохранения</a>
+
+<!--      <input type="hidden" id="id" th:name="id" th:field="*{id}"/>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <input type="hidden" id="user" th:name="user" th:field="*{user.id}"/>-->
+<!--    </div>-->
+    <div class="form-group">
+      <input type="hidden" id="city" th:name="city" th:field="*{city.id}"/>
+    </div>
+      <div class="form-group">
+        <label for="transportCategory">Категория: </label>
+        <select class="form-control" name="transportCategory" id="transportCategory" th:field="*{transportCategory}">
+          <option th:each="category : ${categories}"
+                  th:value="${category.id}"
+                  th:selected="${category.id == transportEdit.transportCategory}"
+                  th:text="${category.name}">
+          </option>
+        </select>
+      </div>
+
+    <div class="form-group">
+      <label for="price">Цена: </label>
+      <input type="text" class="form-control" id="price" th:name="price" th:field="*{price}" maxlength="255"/>
+    </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@
           <form th:action="@{'/cities/{city_id}/'(city_id=${city.id})}"
                 th:method="delete" method="post">
             <span th:text="${'Удалить ' + city.name + '?'}" class="h4" >
-                Удалить фотографию?
+                Удалить город?
             </span>
               &nbsp;&nbsp;&nbsp;
               <a th:href="@{/cities/list}" class="btn btn-outline-primary">

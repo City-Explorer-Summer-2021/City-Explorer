@@ -12,8 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -26,8 +25,7 @@ public class Transport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 255, message = "Size must be less than 255")
+    @NotNull(message = "Price cannot be null")
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)

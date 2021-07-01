@@ -269,6 +269,10 @@
                 <div th:object="${transports}">
                     <h4 align="center">Транспорт:</h4>
                     <br>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{'/cities/{id}/transports/list'(id=${city.id})}">Открыть список транспорта</a>
+                    </div>
+                    <br>
                     <div class="align-middle">
           <span th:if="${transports.size() == 0}">
             <td th:text="'Информации о Транспорте пока что нет'">Информации о Транспорте пока что нет</td>
