@@ -3,6 +3,7 @@ package com.example.cityexplorer.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,10 +46,12 @@ public class Event {
 
     @NotNull(message = "Start date cannot be empty")
     @Column(name = "start_date")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime startDate;
 
     @NotNull(message = "Finish date cannot be empty")
     @Column(name = "finish_date")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime finishDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

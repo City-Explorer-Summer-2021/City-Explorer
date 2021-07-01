@@ -30,8 +30,8 @@
             <h5 style="alignment: center; margin-top: 15px;" th:text="*{name}">Название Мероприятия</h5>
             <p><span th:text="*{description}">Описание</span></p>
             <p><span th:text="'Адрес: ' + *{address}">Адрес</span></p>
-            <p><span th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm:ss')}">Дата начала</span></p>
-            <p><span th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm:ss')}">Дата окончания</span></p>
+            <p><span th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm')}">Дата начала</span></p>
+            <p><span th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm')}">Дата окончания</span></p>
         </div>
     </div>
 

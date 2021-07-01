@@ -41,8 +41,8 @@
                     </td>
                     <td th:text="${event.description}">Описание</td>
                     <td th:text="${event.address}">Адрес</td>
-                    <td th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm:ss')}">Дата начала</td>
-                    <td th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm:ss')}">Дата окончания</td>
+                    <td th:text="${#temporals.format(event.startDate, 'dd.MM.yyyy HH:mm')}">Дата начала</td>
+                    <td th:text="${#temporals.format(event.finishDate, 'dd.MM.yyyy HH:mm')}">Дата окончания</td>
                     <td th:if="${isAdmin}" style="text-align: center">
                         <a th:href="@{'/cities/{city_id}/events/{event_id}/edit'(city_id=${city.id}, event_id=${event.id})}"
                            class="btn btn-outline-primary">
