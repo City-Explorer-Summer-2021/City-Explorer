@@ -92,9 +92,17 @@ public class CityServiceImpl implements CityService {
         Assert.notNull(id, ErrorMessages.NULL_CITY_ID.getErrorMessage());
         Assert.notNull(city, ErrorMessages.NULL_CITY_OBJECT.getErrorMessage());
 
-        getById(id);
+        City fetched = getById(id);
 
         log.info("Updating the City with id: {}", id);
+        city.setPhotos(fetched.getPhotos());
+        city.setTransports(fetched.getTransports());
+        city.setHotels(fetched.getHotels());
+        city.setAttractions(fetched.getAttractions());
+        city.setEvents(fetched.getEvents());
+        city.setFoodPlaces(fetched.getFoodPlaces());
+
+
         city.setId(id);
 
         return cityRepository.save(city);

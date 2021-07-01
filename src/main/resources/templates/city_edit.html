@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{main_template/main_template.html}">
+<body>
+<div layout:fragment="content_part">
+
+  <form class="form-horizontal" th:object="${cityEdit}"
+        th:action="${isNew ?
+            '/cities/' :
+            '/cities/' + cityEdit.id}"
+        th:method="${isNew ? 'post' : 'put'}"
+        name="city_edit" id="city_edit" method="post" role="form">
+<!--    <div class="form-group">-->
+<!--      <input type="hidden" id="id" th:name="id" th:field="*{id}"/>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <input type="hidden" id="user" th:name="user" th:field="*{user.id}"/>-->
+<!--    </div>-->
+
+    <div class="form-group">
+      <input type="hidden" id="city" th:name="city" th:field="${cityEdit.id}"/>
+    </div>
+                <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Добавление/редактирование города</h3></div>
+                        <br>
+    <div class="row g-3">
+      <div class="col-12">
+        <label for="name" class="form-label">Название:</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" minlength="1" maxlength="255" required>
+
+        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="description" class="form-label">Описание:</label>
+        <textarea th:field="*{description}" class="form-control" id="description" minlength="1" rows="6" cols="45"  required/>
+
+        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('description')}"
+             th:errors="*{description}"></div>
+      </div>
+
+      <div class="col-6">
+        <label for="lat" class="form-label">Широта:</label>
+        <input type="text" th:field="*{lat}" class="form-control" id="lat" minlength="1" maxlength="20" placeholder="00.000" required>
+
+        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('lat')}"
+             th:errors="*{lat}"></div>
+      </div>
+
+      <div class="col-6">
+        <label for="lon" class="form-label">Долгота: <span
+                class="text-muted"></span> </label>
+        <input type="text" th:field="*{lon}"  class="form-control" id="lon"
+               placeholder="00.000" minlength="1" maxlength="20">
+
+        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('lon')}"
+             th:errors="*{lon}"></div>
+
+      </div>
+
+      <br>
+      <button class="btn btn-primary " type="submit">Сохранить</button>
+      <br><br>
+
+    </div>
+  </form>
+</div>
+</body>
+</html>
