@@ -39,6 +39,7 @@ public class HotelController {
         model.addAttribute("currentUser", user);
         model.addAttribute("hotels", hotels);
         model.addAttribute("city", city);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "hotels";
     }
 
@@ -52,6 +53,7 @@ public class HotelController {
         model.addAttribute("hotel", hotel);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", false);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "hotel";
     }
 
@@ -95,6 +97,7 @@ public class HotelController {
         model.addAttribute("hotel", hotel);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", true);
+        model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "hotel";
     }
 
