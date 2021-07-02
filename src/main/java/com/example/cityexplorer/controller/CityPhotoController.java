@@ -2,12 +2,10 @@ package com.example.cityexplorer.controller;
 
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.CityPhoto;
-import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.CityPhotoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -88,9 +86,9 @@ public class CityPhotoController {
     public String getPhotoDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("photoId") CityPhoto cityPhoto,
-            @AuthenticationPrincipal User user,
             Model model) {
-        model.addAttribute("currentUser", user);
+        List<CityPhoto> cityPhotos = cityPhotoService.getList(city);
+        model.addAttribute("cityPhotos", cityPhotos);
         model.addAttribute("cityPhoto", cityPhoto);
         model.addAttribute("city", city);
         model.addAttribute("isDeleting", true);
