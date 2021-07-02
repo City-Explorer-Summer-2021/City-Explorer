@@ -7,7 +7,7 @@
 <body>
 <div layout:fragment="content_part">
 
-    <div th:if="${isDeleting && hotel.user == currentUser}" style="alignment: center; margin-top: 15px;">
+    <div th:if="${isDeleting && (hotel.user == currentUser || isAdmin)}" style="alignment: center; margin-top: 15px;">
         <form th:action="@{'/cities/{city_id}/hotels/{hotel_id}'(city_id=${city.id}, hotel_id=${hotel.id})}"
               th:method="delete" method="post">
             <span th:text="${'Удалить ' + hotel.name + '?'}" class="h4" >
