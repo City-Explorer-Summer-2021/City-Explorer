@@ -6,6 +6,9 @@
       layout:decorate="~{main_template/main_template.html}">
 <body>
 <div layout:fragment="content_part">
+  <div class="col-1">
+  </div>
+  <div class="col-6">
   <br><br><br>
   <div style="text-align: center;"><h3 style="alignment: center; margin-top: 15px;">Вход в учётную запись</h3></div>
   <br><br>
@@ -39,6 +42,8 @@
   <br>
   <p align="center">Нет учётной записи? <a th:href="@{/registration}" style="color: grey">Регистрация</a>
   </p>
+  <div class="col-1">
+  </div>
 </div>
 </body>
 </html>
