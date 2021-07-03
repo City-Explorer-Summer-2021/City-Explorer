@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService {
         Assert.notNull(city, ErrorMessages.NULL_CITY_OBJECT.getErrorMessage());
 
         log.info("Requested Event list for {} ({})", city.getName(), city.getId());
-        return eventRepository.findAllByCity(city);
+        return eventRepository.findAllByCityOrderByStartDate(city);
     }
 
     @Override

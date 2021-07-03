@@ -3,8 +3,8 @@ package com.example.cityexplorer.controller;
 import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.model.FoodPlaceValuation;
 import com.example.cityexplorer.service.FoodPlaceValuationService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +21,7 @@ public class FoodPlaceValuationController {
     }
 
     @PostMapping("/cities/{cityId}/foodplaces/{foodplaceId}/valuations")
+    @PreAuthorize("hasAuthority('USER')")
     public String addValuation(
             @PathVariable("cityId") Long cityId,
             @PathVariable("foodplaceId") Long foodplaceId,
@@ -35,6 +36,7 @@ public class FoodPlaceValuationController {
     }
 
     @PutMapping("/cities/{cityId}/foodplaces/{foodplaceId}/valuations")
+    @PreAuthorize("hasAuthority('USER')")
     public String updateValuation(
             @PathVariable("cityId") Long cityId,
             @PathVariable("foodplaceId") Long foodplaceId,

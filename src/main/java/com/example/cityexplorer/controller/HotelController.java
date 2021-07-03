@@ -6,6 +6,7 @@ import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.HotelCategoryService;
 import com.example.cityexplorer.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +59,7 @@ public class HotelController {
     }
 
     @GetMapping("/cities/{cityId}/hotels/{hotelId}/edit")
+    @PreAuthorize("hasAuthority('USER') and (#hotel.user == #user or hasAuthority('ADMIN'))")
     public String getHotelEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("hotelId") Hotel hotel,
@@ -72,6 +74,7 @@ public class HotelController {
     }
 
     @GetMapping("/cities/{cityId}/hotels/add")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public String getHotelAddPage(
             @PathVariable("cityId") City city,
             @AuthenticationPrincipal User user,
@@ -88,6 +91,7 @@ public class HotelController {
     }
 
     @GetMapping("/cities/{cityId}/hotels/{hotelId}/delete")
+    @PreAuthorize("hasAuthority('USER') and (#hotel.user == #user or hasAuthority('ADMIN'))")
     public String getHotelDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("hotelId") Hotel hotel,
@@ -102,6 +106,7 @@ public class HotelController {
     }
 
     @PostMapping("/cities/{cityId}/hotels")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public String saveNewHotel(@PathVariable("cityId") Long cityId,
                                Hotel hotel) {
         hotelService.save(hotel);
@@ -109,17 +114,21 @@ public class HotelController {
     }
 
     @PutMapping(value = "/cities/{cityId}/hotels/{hotelId}")
+    @PreAuthorize("hasAuthority('USER') and (#hotel.user == #user or hasAuthority('ADMIN'))")
     public String updateHotel(@PathVariable("cityId") Long cityId,
                               @PathVariable("hotelId") Long hotelId,
+                              @AuthenticationPrincipal User user,
                               Hotel hotel) {
         hotelService.update(hotelId, hotel);
         return String.format("redirect:/cities/%d/hotels", cityId);
     }
 
     @DeleteMapping("/cities/{cityId}/hotels/{hotelId}")
+    @PreAuthorize("hasAuthority('USER') and (#hotel.user == #user or hasAuthority('ADMIN'))")
     public String deleteHotel(@PathVariable("cityId") Long cityId,
-                              @PathVariable("hotelId") Long hotelId) {
-        hotelService.delete(hotelId);
+                              @PathVariable("hotelId") Hotel hotel,
+                              @AuthenticationPrincipal User user) {
+        hotelService.delete(hotel.getId());
         return String.format("redirect:/cities/%d/hotels", cityId);
     }
 }

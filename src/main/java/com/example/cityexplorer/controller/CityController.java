@@ -3,6 +3,7 @@ package com.example.cityexplorer.controller;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ public class CityController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String openAddCityPage(Model model) {
         model.addAttribute("isNew", true);
         model.addAttribute("cityEdit", new City());
@@ -36,6 +38,7 @@ public class CityController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addNewCityToDB(
             @Valid @ModelAttribute("cityEdit") City city,
             BindingResult bindingResult) {
@@ -56,6 +59,7 @@ public class CityController {
     }
 
     @GetMapping("/{cityId}/delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getCityDeletePage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -68,12 +72,14 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteCity(@PathVariable("cityId") Long id) {
         cityService.delete(id);
         return "redirect:/cities/list";
     }
 
     @GetMapping("/{cityId}/edit")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getCityEditPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -83,6 +89,7 @@ public class CityController {
     }
 
     @PutMapping(value = "/{cityId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateCity(@PathVariable("cityId") Long cityId,
                              @Valid @ModelAttribute("cityEdit") City city,
                              BindingResult bindingResult) {

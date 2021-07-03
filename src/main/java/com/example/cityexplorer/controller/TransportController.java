@@ -6,6 +6,7 @@ import com.example.cityexplorer.service.CityService;
 import com.example.cityexplorer.service.TransportCategoryService;
 import com.example.cityexplorer.service.TransportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,6 +42,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/{transportId}/edit")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getTransportEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("transportId") Transport transport,
@@ -54,6 +56,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/{transportId}/delete")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String getTransportDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("transportId") Transport transport,
@@ -68,6 +71,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/add")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String getTransportAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -82,6 +86,7 @@ public class TransportController {
     }
 
     @PostMapping("/cities/{cityId}/transports")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String saveNewTransport(@PathVariable("cityId") City city,
                                Transport transport,
                                Model model) {
@@ -95,6 +100,7 @@ public class TransportController {
     }
 
     @PutMapping(value = "/cities/{cityId}/transports/{transportId}")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String updateTransport(@PathVariable("cityId") Long cityId,
                                   @PathVariable("transportId") Long transportId,
                                   Transport transport,
@@ -109,6 +115,7 @@ public class TransportController {
     }
 
     @DeleteMapping("/cities/{cityId}/transports/{transportId}")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String deleteTransport(@PathVariable("cityId") Long cityId,
                                   @PathVariable("transportId") Long transportId,
                                   Model model) {

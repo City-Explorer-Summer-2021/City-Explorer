@@ -5,6 +5,7 @@ import com.example.cityexplorer.model.Event;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/{eventId}/edit")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("eventId") Event event,
@@ -63,6 +65,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -75,6 +78,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/{eventId}/delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("eventId") Event event,
@@ -88,6 +92,7 @@ public class EventController {
     }
 
     @PostMapping("/cities/{cityId}/events")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveNewEvent(@PathVariable("cityId") Long cityId,
                                Event event) {
         eventService.save(event);
@@ -95,6 +100,7 @@ public class EventController {
     }
 
     @PutMapping(value = "/cities/{cityId}/events/{eventId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateEvent(@PathVariable("cityId") Long cityId,
                               @PathVariable("eventId") Long eventId,
                               Event event) {
@@ -103,6 +109,7 @@ public class EventController {
     }
 
     @DeleteMapping("/cities/{cityId}/events/{eventId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteEvent(@PathVariable("cityId") Long cityId,
                               @PathVariable("eventId") Long eventId) {
         eventService.delete(eventId);
