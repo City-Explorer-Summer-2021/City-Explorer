@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    List<Event> findAllByCity(City city);
+    List<Event> findAllByCityOrderByStartDate(City city);
 
 }

@@ -21,7 +21,7 @@ public class FoodPlaceValuationController {
     }
 
     @PostMapping("/cities/{cityId}/foodplaces/{foodplaceId}/valuations")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String addValuation(
             @PathVariable("cityId") Long cityId,
             @PathVariable("foodplaceId") Long foodplaceId,
@@ -36,7 +36,7 @@ public class FoodPlaceValuationController {
     }
 
     @PutMapping("/cities/{cityId}/foodplaces/{foodplaceId}/valuations")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String updateValuation(
             @PathVariable("cityId") Long cityId,
             @PathVariable("foodplaceId") Long foodplaceId,

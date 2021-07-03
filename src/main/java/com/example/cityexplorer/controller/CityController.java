@@ -30,7 +30,7 @@ public class CityController {
     }
 
     @GetMapping("/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String openAddCityPage(Model model) {
         model.addAttribute("isNew", true);
         model.addAttribute("cityEdit", new City());
@@ -38,7 +38,7 @@ public class CityController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addNewCityToDB(
             @Valid @ModelAttribute("cityEdit") City city,
             BindingResult bindingResult) {
@@ -59,7 +59,7 @@ public class CityController {
     }
 
     @GetMapping("/{cityId}/delete")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getCityDeletePage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -72,14 +72,14 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteCity(@PathVariable("cityId") Long id) {
         cityService.delete(id);
         return "redirect:/cities/list";
     }
 
     @GetMapping("/{cityId}/edit")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getCityEditPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -89,7 +89,7 @@ public class CityController {
     }
 
     @PutMapping(value = "/{cityId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateCity(@PathVariable("cityId") Long cityId,
                              @Valid @ModelAttribute("cityEdit") City city,
                              BindingResult bindingResult) {

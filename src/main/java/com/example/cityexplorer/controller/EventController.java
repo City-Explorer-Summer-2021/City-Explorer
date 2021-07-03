@@ -40,7 +40,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/{eventId}/edit")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("eventId") Event event,
@@ -65,7 +65,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -78,7 +78,7 @@ public class EventController {
     }
 
     @GetMapping("/cities/{cityId}/events/{eventId}/delete")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getEventDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("eventId") Event event,
@@ -92,7 +92,7 @@ public class EventController {
     }
 
     @PostMapping("/cities/{cityId}/events")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveNewEvent(@PathVariable("cityId") Long cityId,
                                Event event) {
         eventService.save(event);
@@ -100,7 +100,7 @@ public class EventController {
     }
 
     @PutMapping(value = "/cities/{cityId}/events/{eventId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateEvent(@PathVariable("cityId") Long cityId,
                               @PathVariable("eventId") Long eventId,
                               Event event) {
@@ -109,7 +109,7 @@ public class EventController {
     }
 
     @DeleteMapping("/cities/{cityId}/events/{eventId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteEvent(@PathVariable("cityId") Long cityId,
                               @PathVariable("eventId") Long eventId) {
         eventService.delete(eventId);

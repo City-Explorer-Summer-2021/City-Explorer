@@ -37,7 +37,7 @@ public class CityPhotoController {
     }
 
     @GetMapping("/cities/{cityId}/photo/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addPhotoPage(@PathVariable("cityId") City city,
                                Model model) {
 
@@ -50,7 +50,7 @@ public class CityPhotoController {
     }
 
     @PostMapping("/cities/{cityId}/photo/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String handleFileUpload(
             @RequestParam("file") MultipartFile file,
             @PathVariable("cityId") City city,
@@ -86,7 +86,7 @@ public class CityPhotoController {
     }
 
     @GetMapping("/cities/{cityId}/photos/{photoId}/delete")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getPhotoDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("photoId") CityPhoto cityPhoto,
@@ -100,7 +100,7 @@ public class CityPhotoController {
     }
 
     @DeleteMapping("/cities/{cityId}/photos/{photoId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deletePhoto(@PathVariable("cityId") Long cityId,
                               @PathVariable("photoId") CityPhoto cityPhoto) {
         cityPhotoService.delete(cityPhoto);

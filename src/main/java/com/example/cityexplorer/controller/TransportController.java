@@ -42,7 +42,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/{transportId}/edit")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getTransportEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("transportId") Transport transport,
@@ -56,7 +56,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/{transportId}/delete")
-    @PreAuthorize("hasAuthority('ROLE_ADNIN')")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String getTransportDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("transportId") Transport transport,
@@ -71,7 +71,7 @@ public class TransportController {
     }
 
     @GetMapping("/cities/{cityId}/transports/add")
-    @PreAuthorize("hasAuthority('ROLE_ADNIN')")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String getTransportAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -86,7 +86,7 @@ public class TransportController {
     }
 
     @PostMapping("/cities/{cityId}/transports")
-    @PreAuthorize("hasAuthority('ROLE_ADNIN')")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String saveNewTransport(@PathVariable("cityId") City city,
                                Transport transport,
                                Model model) {
@@ -100,7 +100,7 @@ public class TransportController {
     }
 
     @PutMapping(value = "/cities/{cityId}/transports/{transportId}")
-    @PreAuthorize("hasAuthority('ROLE_ADNIN')")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String updateTransport(@PathVariable("cityId") Long cityId,
                                   @PathVariable("transportId") Long transportId,
                                   Transport transport,
@@ -115,7 +115,7 @@ public class TransportController {
     }
 
     @DeleteMapping("/cities/{cityId}/transports/{transportId}")
-    @PreAuthorize("hasAuthority('ROLE_ADNIN')")
+    @PreAuthorize("hasAuthority('ADNIN')")
     public String deleteTransport(@PathVariable("cityId") Long cityId,
                                   @PathVariable("transportId") Long transportId,
                                   Model model) {

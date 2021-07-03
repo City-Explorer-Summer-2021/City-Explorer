@@ -69,7 +69,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/edit")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getFoodPlaceEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("foodPlaceId") FoodPlace foodPlace,
@@ -81,7 +81,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getFoodPlaceAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -94,7 +94,7 @@ public class FoodPlaceController {
     }
 
     @GetMapping("/cities/{cityId}/foodplaces/{foodPlaceId}/delete")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getFoodPlaceDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("foodPlaceId") FoodPlace foodPlace,
@@ -108,7 +108,7 @@ public class FoodPlaceController {
     }
 
     @PostMapping("/cities/{cityId}/foodplaces")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveNewFoodPlace(@PathVariable("cityId") Long cityId,
                                    FoodPlace foodPlace) {
         foodPlaceService.save(foodPlace);
@@ -116,7 +116,7 @@ public class FoodPlaceController {
     }
 
     @PutMapping(value = "/cities/{cityId}/foodplaces/{foodPlaceId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateFoodPlace(@PathVariable("cityId") Long cityId,
                                   @PathVariable("foodPlaceId") Long foodPlaceId,
                                   FoodPlace foodPlace) {
@@ -125,7 +125,7 @@ public class FoodPlaceController {
     }
 
     @DeleteMapping("/cities/{cityId}/foodplaces/{foodPlaceId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteFoodPlace(@PathVariable("cityId") Long cityId,
                                   @PathVariable("foodPlaceId") Long foodPlaceId) {
         foodPlaceService.delete(foodPlaceId);
