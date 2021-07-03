@@ -4,8 +4,8 @@ import com.example.cityexplorer.model.Attraction;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.User;
 import com.example.cityexplorer.service.AttractionService;
-import com.example.cityexplorer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +53,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/{attractionId}/edit")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String getAttractionEditPage(
             @PathVariable("cityId") City city,
             @PathVariable("attractionId") Attraction attraction,
@@ -64,6 +65,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/add")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String getAttractionAddPage(
             @PathVariable("cityId") City city,
             Model model) {
@@ -76,6 +78,7 @@ public class AttractionController {
     }
 
     @GetMapping("/cities/{cityId}/attractions/{attractionId}/delete")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String getAttractionDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("attractionId") Attraction attraction,
@@ -89,6 +92,7 @@ public class AttractionController {
     }
 
     @PostMapping("/cities/{cityId}/attractions")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String saveNewAttraction(@PathVariable("cityId") Long cityId,
                                     Attraction attraction) {
         attractionService.save(attraction);
@@ -96,6 +100,7 @@ public class AttractionController {
     }
 
     @PutMapping(value = "/cities/{cityId}/attractions/{attractionId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String updateAttraction(@PathVariable("cityId") Long cityId,
                                    @PathVariable("attractionId") Long attractionId,
                                    Attraction attraction) {
@@ -104,6 +109,7 @@ public class AttractionController {
     }
 
     @DeleteMapping("/cities/{cityId}/attractions/{attractionId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String deleteAttraction(@PathVariable("cityId") Long cityId,
                                    @PathVariable("attractionId") Long attractionId) {
         attractionService.delete(attractionId);

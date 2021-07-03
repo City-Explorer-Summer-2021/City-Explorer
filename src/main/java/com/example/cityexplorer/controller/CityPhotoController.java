@@ -6,6 +6,7 @@ import com.example.cityexplorer.service.CityPhotoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +37,7 @@ public class CityPhotoController {
     }
 
     @GetMapping("/cities/{cityId}/photo/add")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addPhotoPage(@PathVariable("cityId") City city,
                                Model model) {
 
@@ -48,6 +50,7 @@ public class CityPhotoController {
     }
 
     @PostMapping("/cities/{cityId}/photo/add")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String handleFileUpload(
             @RequestParam("file") MultipartFile file,
             @PathVariable("cityId") City city,
@@ -83,6 +86,7 @@ public class CityPhotoController {
     }
 
     @GetMapping("/cities/{cityId}/photos/{photoId}/delete")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String getPhotoDeletePage(
             @PathVariable("cityId") City city,
             @PathVariable("photoId") CityPhoto cityPhoto,
@@ -96,6 +100,7 @@ public class CityPhotoController {
     }
 
     @DeleteMapping("/cities/{cityId}/photos/{photoId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String deletePhoto(@PathVariable("cityId") Long cityId,
                               @PathVariable("photoId") CityPhoto cityPhoto) {
         cityPhotoService.delete(cityPhoto);
