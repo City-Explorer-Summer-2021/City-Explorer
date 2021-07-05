@@ -29,6 +29,8 @@
                     <th>Название</th>
                     <th>Категория</th>
                     <th>Адрес</th>
+                    <th>Цена от</th>
+                    <th>Цена до</th>
                     <th>Телефон</th>
                     <th>Автор</th>
                     <th colspan="2" th:if="${currentUser != null}"></th>
@@ -42,6 +44,8 @@
                     </td>
                     <td th:text="${hotel.hotelCategory.name}">Категория</td>
                     <td th:text="${hotel.address}">Адрес</td>
+                    <td th:text="${hotel.priceFrom}">Цена от</td>
+                    <td th:text="${hotel.priceTo}">Цена от</td>
                     <td th:text="${hotel.phone}">Телефон</td>
                     <td th:text="${hotel.user.firstName} + ' ' + ${hotel.user.lastName}">Автор</td>
                     <td th:if="${currentUser != null}" style="text-align: center">
