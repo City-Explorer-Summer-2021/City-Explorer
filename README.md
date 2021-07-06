@@ -52,6 +52,7 @@ Security
 * [Добавляем БД PostgreSQL к RESTful сервису на Spring Boot. Часть 2](https://javarush.ru/groups/posts/2582-dobavljaem-bd-k-restful-servisu-na-spring-boot-chastjh-2)
 * [Урок 3-5: Расширенное использование Spring Data JPA](https://russianblogs.com/article/3640761048/)
 * [Java Code Examples for javax.persistence.criteria.Order](https://www.programcreek.com/java-api-examples/index.php?api=javax.persistence.criteria.Order)
+* [hibernate jpa criteriabuilder ignore case queries](https://stackoverflow.com/questions/4635777/hibernate-jpa-criteriabuilder-ignore-case-queries)
 
 Thymeleaf
 * [Tutorial: Thymeleaf + Spring](https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html)
