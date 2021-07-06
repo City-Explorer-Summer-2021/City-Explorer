@@ -29,7 +29,7 @@ public class City {
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     private String name;
 
     @NotBlank(message = "Description cannot be empty")

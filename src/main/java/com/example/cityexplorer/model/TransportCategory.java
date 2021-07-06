@@ -23,7 +23,7 @@ public class TransportCategory {
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Size(max = 255, message = "Size must be less then 255")
+    @Size(max = 255, message = "Size must be less than 255")
     private String name;
 
 }

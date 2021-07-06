@@ -1,5 +1,6 @@
 package com.example.cityexplorer.controller;
 
+import com.example.cityexplorer.dto.HotelFilterDto;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.Hotel;
 import com.example.cityexplorer.model.User;
@@ -36,7 +37,36 @@ public class HotelController {
             @PathVariable("cityId") City city,
             @AuthenticationPrincipal User user,
             Model model) {
-        List<Hotel> hotels = hotelService.getList(city);
+        return getListPage(
+                city,
+                user,
+                hotelService.getList(city),
+                hotelService.newFilter(city),
+                model);
+    }
+
+    @GetMapping("/cities/{cityId}/hotels/filtered")
+    public String getFilteredList(
+            @PathVariable("cityId") City city,
+            @AuthenticationPrincipal User user,
+            HotelFilterDto hotelFilter,
+            Model model) {
+        return getListPage(
+                city,
+                user,
+                hotelService.getFilteredList(city, hotelFilter),
+                hotelFilter,
+                model);
+    }
+
+    private String getListPage(
+            City city,
+            User user,
+            List<Hotel> hotels,
+            HotelFilterDto hotelFilter,
+            Model model) {
+        model.addAttribute("hotelFilter", hotelFilter);
+        model.addAttribute("categories", hotelCategoryService.getList());
         model.addAttribute("currentUser", user);
         model.addAttribute("hotels", hotels);
         model.addAttribute("city", city);

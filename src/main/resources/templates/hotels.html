@@ -13,10 +13,48 @@
         <br>
     </div>
 
-    <br><br>
+    <h4 align="center">Жильё:</h4>
+
+    <div>
+        <form class="row g-12" th:object="${hotelFilter}"
+              th:action="@{'/cities/{city_id}/hotels/filtered'(city_id=${city.id})}"
+              th:method="get" method="post">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="content" th:name="content" th:field="*{content}" maxlength="255"
+                    placeholder="Содержит текст ..."/>
+            </div>
+            <div class="col-md-2        ">
+                <select class="form-control" name="hotelCategory" id="hotelCategory" th:field="*{hotelCategory}">
+                    <option value="0">Все</option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="number" min="0.00" step="0.01"
+                       class="form-control" id="price_from" th:name="price_from" th:field="*{priceFrom}"/>
+            </div>
+            <div class="col-md-2">
+                <input type="number" min="0.00" step="0.01"
+                       class="form-control" id="price_to" th:name="price_to" th:field="*{priceTo}"/>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <a th:href="@{'/cities/{city_id}/hotels'(city_id=${city.id})}"
+                   class="btn btn-outline-primary">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </div>
+        </form>
+    </div>
 
     <div th:object="${hotels}">
-        <h4 align="center">Жильё:</h4>
         <br>
         <tr class="align-middle">
           <span th:if="${hotels.size() == 0}">
@@ -29,6 +67,8 @@
                     <th>Название</th>
                     <th>Категория</th>
                     <th>Адрес</th>
+                    <th>Цена от</th>
+                    <th>Цена до</th>
                     <th>Телефон</th>
                     <th>Автор</th>
                     <th colspan="2" th:if="${currentUser != null}"></th>
@@ -42,6 +82,8 @@
                     </td>
                     <td th:text="${hotel.hotelCategory.name}">Категория</td>
                     <td th:text="${hotel.address}">Адрес</td>
+                    <td th:text="${hotel.priceFrom}">Цена от</td>
+                    <td th:text="${hotel.priceTo}">Цена от</td>
                     <td th:text="${hotel.phone}">Телефон</td>
                     <td th:text="${hotel.user.firstName} + ' ' + ${hotel.user.lastName}">Автор</td>
                     <td th:if="${currentUser != null}" style="text-align: center">

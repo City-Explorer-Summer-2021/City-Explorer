@@ -36,7 +36,8 @@ public enum ErrorMessages {
     NULL_TRANSPORT_ID("Transport id should not be null"),
     NULL_TRANSPORT_OBJECT("Transport object should not be null"),
     NULL_TRANSPORT_CATEGORY_ID("Transport category id should not be null"),
-    NULL_TRANSPORT_CATEGORY_OBJECT("Transport category object should not be null");
+    NULL_TRANSPORT_CATEGORY_OBJECT("Transport category object should not be null"),
+    NULL_HOTEL_FILTER_OBJECT("Hotel filter object should not be null");
 
     private final String errorMessage;
 
