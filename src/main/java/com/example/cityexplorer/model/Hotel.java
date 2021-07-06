@@ -32,16 +32,18 @@ public class Hotel {
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     private String name;
 
     @NotBlank(message = "Description cannot be empty")
     private String description;
 
     @NotBlank(message = "Address cannot be empty")
+    @Size(max = 255, message = "Must be less than 255")
     private String address;
 
     @NotBlank(message = "Phone cannot be empty")
+    @Size(max = 255, message = "Must be less than 255")
     private String phone;
 
     @NotNull(message = "Price \"From\" cannot be null")

@@ -33,15 +33,15 @@ public class Event {
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     private String name;
 
     @NotBlank(message = "Description cannot be empty")
-    @Size(max = 1023, message = "Must be less then 1023")
+    @Size(max = 1023, message = "Must be less than 1023")
     private String description;
 
     @NotBlank(message = "Address cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     private String address;
 
     @NotNull(message = "Start date cannot be empty")

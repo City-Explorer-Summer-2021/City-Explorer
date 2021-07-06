@@ -52,16 +52,16 @@ public class User implements UserDetails {
     private String email;
 
     @NotBlank(message = "Phone number cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     private String phone;
 
     @NotBlank(message = "Firstname cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     @Column(name = "firstname")
     private String firstName;
 
     @NotBlank(message = "Lastname cannot be empty")
-    @Size(max = 255, message = "Must be less then 255")
+    @Size(max = 255, message = "Must be less than 255")
     @Column(name = "lastname")
     private String lastName;
 

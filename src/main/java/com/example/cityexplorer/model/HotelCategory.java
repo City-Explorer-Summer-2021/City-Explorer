@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "hotel_category")
@@ -23,6 +24,19 @@ public class HotelCategory {
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Size(max = 255, message = "Size must be less then 255")
+    @Size(max = 255, message = "Size must be less than 255")
     private String name;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HotelCategory that = (HotelCategory) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
