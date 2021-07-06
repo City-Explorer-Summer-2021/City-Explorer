@@ -143,10 +143,10 @@ public class HotelServiceImpl implements HotelService {
             Root<Hotel> root,
             CriteriaBuilder cb) {
         List<Predicate> groupOr = new ArrayList<>();
-        String likeCondition = "%" + hotelFilter.getContent() + "%";
-        groupOr.add(cb.like(root.get("name"), likeCondition));
-        groupOr.add(cb.like(root.get("description"), likeCondition));
-        groupOr.add(cb.like(root.get("address"), likeCondition));
+        String likeCondition = "%" + hotelFilter.getContent().toLowerCase() + "%";
+        groupOr.add(cb.like(cb.lower(root.get("name")), likeCondition));
+        groupOr.add(cb.like(cb.lower(root.get("description")), likeCondition));
+        groupOr.add(cb.like(cb.lower(root.get("address")), likeCondition));
         return groupOr.toArray(new Predicate[groupOr.size()]);
     }
 
