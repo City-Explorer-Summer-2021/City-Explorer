@@ -39,8 +39,7 @@ public class FoodPlaceController {
             @PathVariable("cityId") City city,
             @AuthenticationPrincipal User user,
             Model model) {
-        List<FoodPlace> foodPlaces = foodPlaceService.getList(city);
-        model.addAttribute("foodPlaces", foodPlaces);
+        model.addAttribute("foodPlaces", foodPlaceService.getListWithValuations(city));
         model.addAttribute("city", city);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
         return "foodplaces";
@@ -58,13 +57,12 @@ public class FoodPlaceController {
         model.addAttribute("user", user);
         model.addAttribute("isAdmin", user != null && user.isAdmin());
 
-        FoodPlaceValuation valuation = valuationService.getByByFoodPlaceAndUser(foodPlace, user);
+        FoodPlaceValuation valuation = valuationService.getByFoodPlaceAndUser(foodPlace, user);
         model.addAttribute("valuation", valuation);
         model.addAttribute("isNewValuation", valuation.getValue() < 1);
 
         AvgValuationProjection avgValuation = valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId());
-        model.addAttribute("valuationAvg",
-                String.format("%.1f", avgValuation.getAvgValue()));
+        model.addAttribute("valuationAvg", avgValuation.getAvgValue());
         model.addAttribute("valuationCount",
                 avgValuation.getVotesNumer());
 

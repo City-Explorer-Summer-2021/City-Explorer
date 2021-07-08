@@ -26,7 +26,8 @@
     </div>
 
     <div style="alignment: left; margin-top: 15px; color: darkred">
-        <span th:text="${'Средняя оценка: ' + valuationAvg}"  style="font-weight:700">Средняя оценка: неизвестна</span><br>
+        <span th:text="${'Средняя оценка: ' + #numbers.formatDecimal(valuationAvg, 1, 1)}"  style="font-weight:700">
+            Средняя оценка: неизвестна</span><br>
         <span th:text="${'Количество оценок: ' + valuationCount}"  style="font-weight:700">Количество оценок: неизвестна</span>
     </div>
     <br>

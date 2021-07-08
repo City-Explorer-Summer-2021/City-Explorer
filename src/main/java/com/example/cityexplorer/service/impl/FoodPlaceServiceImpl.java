@@ -4,6 +4,7 @@ import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.exception.NotFoundException;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.FoodPlace;
+import com.example.cityexplorer.projection.FoodPlaceProjection;
 import com.example.cityexplorer.repository.FoodPlaceRepository;
 import com.example.cityexplorer.service.FoodPlaceService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,16 @@ public class FoodPlaceServiceImpl implements FoodPlaceService {
 
         log.info("Requested Food place list for {} ({})", city.getName(), city.getId());
         return foodPlaceRepository.findAllByCity(city);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @NotNull
+    public List<FoodPlaceProjection> getListWithValuations(@NotNull City city) {
+        Assert.notNull(city, ErrorMessages.NULL_CITY_OBJECT.getErrorMessage());
+
+        log.info("Requested Food place list with valuations for {} ({})", city.getName(), city.getId());
+        return foodPlaceRepository.findAllForCity(city);
     }
 
     @Override

@@ -50,7 +50,7 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
     @Override
     @Transactional(readOnly = true)
     @NotNull
-    public FoodPlaceValuation getByByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
+    public FoodPlaceValuation getByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
         Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
 
         if (user == null) {

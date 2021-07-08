@@ -13,7 +13,7 @@ public interface FoodPlaceValuationService {
 
     FoodPlaceValuation getById(Long id);
 
-    FoodPlaceValuation getByByFoodPlaceAndUser(FoodPlace foodPlace, User user);
+    FoodPlaceValuation getByFoodPlaceAndUser(FoodPlace foodPlace, User user);
 
     AvgValuationProjection getAvgValuationByFoodPlaseId(Long foodPlaceId);
 
