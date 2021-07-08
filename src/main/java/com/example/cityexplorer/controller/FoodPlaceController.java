@@ -1,5 +1,6 @@
 package com.example.cityexplorer.controller;
 
+import com.example.cityexplorer.projection.AvgValuationProjection;
 import com.example.cityexplorer.model.City;
 import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.FoodPlaceValuation;
@@ -61,9 +62,11 @@ public class FoodPlaceController {
         model.addAttribute("valuation", valuation);
         model.addAttribute("isNewValuation", valuation.getValue() < 1);
 
+        AvgValuationProjection avgValuation = valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId());
         model.addAttribute("valuationAvg",
-                String.format("%.1f", valuationService.getAvgValuationByFoodPlaseId(foodPlace.getId())));
-        model.addAttribute("valuationCount", valuationService.getCountByFoodPlace(foodPlace));
+                String.format("%.1f", avgValuation.getAvgValue()));
+        model.addAttribute("valuationCount",
+                avgValuation.getVotesNumer());
 
         return "foodplace";
     }
