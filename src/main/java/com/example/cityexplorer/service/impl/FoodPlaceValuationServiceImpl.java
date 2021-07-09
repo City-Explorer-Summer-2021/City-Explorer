@@ -72,7 +72,9 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
     }
 
     @Override
-    public AvgValuationProjection getAvgValuationByFoodPlaseId(Long id) {
+    @Transactional(readOnly = true)
+    @NotNull
+    public AvgValuationProjection getAvgValuationByFoodPlaseId(@NotNull Long id) {
         Assert.notNull(id, ErrorMessages.NULL_FOOD_PLACE_VALUATION_ID.getErrorMessage());
 
         log.info("Requested count of Food place valuation for food place with id: {}", id);
