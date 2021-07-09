@@ -27,6 +27,8 @@
                 <tr>
                     <th>Название</th>
                     <th>Описание</th>
+                    <th>Оценка</th>
+                    <th>Голосов</th>
                     <th>Адрес</th>
                     <th colspan="2" th:if="${isAdmin}"></th>
                 </tr>
@@ -38,6 +40,8 @@
                            th:text="${foodPlace.name}">Название</a>
                     </td>
                     <td th:text="${foodPlace.description}">Описание</td>
+                    <td  align="center" th:text="${#numbers.formatDecimal(foodPlace.avgValue, 1, 1)}">0</td>
+                    <td  align="center" th:text="${foodPlace.votesNumer}">0</td>
                     <td th:text="${foodPlace.address}">Адрес</td>
                     <td th:if="${isAdmin}" style="text-align: center">
                         <a th:href="@{'/cities/{city_id}/foodplaces/{foodplace_id}/edit'(city_id=${city.id}, foodplace_id=${foodPlace.id})}"

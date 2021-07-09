@@ -53,6 +53,8 @@ Security
 * [Урок 3-5: Расширенное использование Spring Data JPA](https://russianblogs.com/article/3640761048/)
 * [Java Code Examples for javax.persistence.criteria.Order](https://www.programcreek.com/java-api-examples/index.php?api=javax.persistence.criteria.Order)
 * [hibernate jpa criteriabuilder ignore case queries](https://stackoverflow.com/questions/4635777/hibernate-jpa-criteriabuilder-ignore-case-queries)
+* [No converter found capable of converting from type to type](https://stackoverflow.com/questions/46083329/no-converter-found-capable-of-converting-from-type-to-type)
+* [Spring JPA :: No converter found capable of converting from type](https://stackoverflow.com/questions/52591535/spring-jpa-no-converter-found-capable-of-converting-from-type)
 
 Thymeleaf
 * [Tutorial: Thymeleaf + Spring](https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html)

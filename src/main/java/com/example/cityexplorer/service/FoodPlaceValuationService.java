@@ -1,5 +1,6 @@
 package com.example.cityexplorer.service;
 
+import com.example.cityexplorer.projection.AvgValuationProjection;
 import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.FoodPlaceValuation;
 import com.example.cityexplorer.model.User;
@@ -12,11 +13,9 @@ public interface FoodPlaceValuationService {
 
     FoodPlaceValuation getById(Long id);
 
-    FoodPlaceValuation getByByFoodPlaceAndUser(FoodPlace foodPlace, User user);
+    FoodPlaceValuation getByFoodPlaceAndUser(FoodPlace foodPlace, User user);
 
-    long getCountByFoodPlace(FoodPlace foodPlace);
-
-    double getAvgValuationByFoodPlaseId(Long foodPlaceId);
+    AvgValuationProjection getAvgValuationByFoodPlaseId(Long foodPlaceId);
 
     FoodPlaceValuation save(FoodPlaceValuation valuation);
 

@@ -1,5 +1,6 @@
 package com.example.cityexplorer.service.impl;
 
+import com.example.cityexplorer.projection.AvgValuationProjection;
 import com.example.cityexplorer.exception.ErrorMessages;
 import com.example.cityexplorer.exception.NotFoundException;
 import com.example.cityexplorer.model.FoodPlace;
@@ -49,7 +50,7 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
     @Override
     @Transactional(readOnly = true)
     @NotNull
-    public FoodPlaceValuation getByByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
+    public FoodPlaceValuation getByFoodPlaceAndUser(@NotNull FoodPlace foodPlace, @NotNull User user) {
         Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
 
         if (user == null) {
@@ -71,22 +72,23 @@ public class FoodPlaceValuationServiceImpl implements FoodPlaceValuationService 
     }
 
     @Override
-    public long getCountByFoodPlace(FoodPlace foodPlace) {
-        Assert.notNull(foodPlace, ErrorMessages.NULL_FOOD_PLACE_OBJECT.getErrorMessage());
-
-        log.info("Requested count of Food place valuation for food place with id: {}",
-                foodPlace.getId());
-
-        return valuationRepository.countByFoodPlace(foodPlace).orElse(0L);
-    }
-
-    @Override
-    public double getAvgValuationByFoodPlaseId(Long id) {
+    public AvgValuationProjection getAvgValuationByFoodPlaseId(Long id) {
         Assert.notNull(id, ErrorMessages.NULL_FOOD_PLACE_VALUATION_ID.getErrorMessage());
 
         log.info("Requested count of Food place valuation for food place with id: {}", id);
 
-        return valuationRepository.getAvgValuationByFoodPlaseId(id).orElse(0.);
+        return valuationRepository.getAvgValuationForFoodPlaseId(id)
+                .orElse(new AvgValuationProjection() {
+                    @Override
+                    public float getAvgValue() {
+                        return 0F;
+                    }
+
+                    @Override
+                    public long getVotesNumer() {
+                        return 0L;
+                    }
+                });
     }
 
     @Override
