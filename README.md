@@ -66,3 +66,4 @@ Thymeleaf
 * [Assert a good practice or not?](https://stackoverflow.com/questions/2440984/assert-a-good-practice-or-not)
 * [How to globally configure `@DateTimeFormat` pattern in Spring Boot?](https://stackoverflow.com/questions/45440919/how-to-globally-configure-datetimeformat-pattern-in-spring-boot)
 * [Bootstrap 5](https://bootstrap5.ru/docs/getting-started/introduction)
+* [Free Weather API](https://openweathermap.org/current)
