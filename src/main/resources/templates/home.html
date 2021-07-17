@@ -207,7 +207,7 @@
                 <h4 align="center">Погода:</h4>
                 <br>
                 <div th:object="${weather}">
-                <p th:text="'Температура на данный момент: ' + *{temp} + '&#8451;'"></p>
+                <p th:text="'Температура на данный момент: ' + *{temperature} + '&#8451;'"></p>
                 <p th:text="'Ощущается как: ' + *{feelsLike} + '&#8451;'"></p>
                 <p th:text="'Влажность: ' + *{humidity} + ' г/м³'"></p>
                 <p th:text="'Скорость ветра: ' + *{windSpeed} + ' м/с'"></p>

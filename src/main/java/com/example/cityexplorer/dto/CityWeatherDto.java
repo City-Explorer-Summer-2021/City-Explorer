@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CityWeatherDto {
-    private double temp;
+    private double temperature;
     private double feelsLike;
     private int humidity;
     private double windSpeed;

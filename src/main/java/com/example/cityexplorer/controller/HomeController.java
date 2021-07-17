@@ -9,8 +9,8 @@ import com.example.cityexplorer.model.Event;
 import com.example.cityexplorer.model.FoodPlace;
 import com.example.cityexplorer.model.Hotel;
 import com.example.cityexplorer.model.Transport;
-import com.example.cityexplorer.rest.weather.WeatherCommunication;
-import com.example.cityexplorer.rest.weather.model.WeatherResponse;
+import com.example.cityexplorer.outside.weather.WeatherCommunication;
+import com.example.cityexplorer.outside.weather.model.WeatherResponse;
 import com.example.cityexplorer.service.AttractionService;
 import com.example.cityexplorer.service.CityPhotoService;
 import com.example.cityexplorer.service.CityService;
@@ -74,15 +74,20 @@ public class HomeController {
         model.addAttribute("city", city);
 
         WeatherResponse weatherResponse = weatherCommunication.getWeatherByCoords(city.getLat(), city.getLon());
-        CityWeatherDto weatherDto = new CityWeatherDto(
-                weatherResponse.getMain().getTemp(),
-                weatherResponse.getMain().getFeels_like(),
-                weatherResponse.getMain().getHumidity(),
-                weatherResponse.getWind().getSpeed(),
-                convertToLocalDateTime(weatherResponse.getSys().getSunrise()),
-                convertToLocalDateTime(weatherResponse.getSys().getSunset())
-        );
-        model.addAttribute("weather", weatherDto);
+
+        if (weatherResponse != null){
+            CityWeatherDto weatherDto = new CityWeatherDto(
+                    weatherResponse.getMain().getTemp(),
+                    weatherResponse.getMain().getFeels_like(),
+                    weatherResponse.getMain().getHumidity(),
+                    weatherResponse.getWind().getSpeed(),
+                    convertToLocalDateTime(weatherResponse.getSys().getSunrise()),
+                    convertToLocalDateTime(weatherResponse.getSys().getSunset())
+            );
+            model.addAttribute("weather", weatherDto);
+        }
+
+
         model.addAttribute("lat", city.getLat());
         model.addAttribute("lon", city.getLon());
 

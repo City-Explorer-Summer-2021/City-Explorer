@@ -1,4 +1,4 @@
-package com.example.cityexplorer.rest.weather.model;
+package com.example.cityexplorer.outside.weather.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
