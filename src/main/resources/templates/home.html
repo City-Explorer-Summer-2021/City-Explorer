@@ -202,6 +202,20 @@
                     <div id="map"></div>
                 </div>
 
+                <span th:if="${weather != null}">
+                <br><br>
+                <h4 align="center">Погода:</h4>
+                <br>
+                <div th:object="${weather}">
+                <p th:text="'Температура на данный момент: ' + *{temperature} + '&#8451;'"></p>
+                <p th:text="'Ощущается как: ' + *{feelsLike} + '&#8451;'"></p>
+                <p th:text="'Влажность: ' + *{humidity} + ' г/м³'"></p>
+                <p th:text="'Скорость ветра: ' + *{windSpeed} + ' м/с'"></p>
+                <p th:text="'Время восхода солнца: ' + ${#temporals.format(weather.sunrise, 'dd.MM.yyyy HH:mm')} "></p>
+                <p th:text="'Время захода солнца: ' + ${#temporals.format(weather.sunset, 'dd.MM.yyyy HH:mm')} "></p>
+                </div>
+                </span>
+
                 <br><br>
 
                 <div th:object="${cityPhotos}">
